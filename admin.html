@@ -1,909 +1,719 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel · Bunda Raya Kitchen</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — Barokah GYM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --red:    #C0392B;
-      --red-dk: #96281B;
-      --red-lt: #FDECEA;
-      --cream:  #FDF6EE;
-      --warm:   #F5E6D3;
-      --brown:  #7D4E2D;
-      --brown-lt: #A0634A;
-      --text:   #1A1008;
-      --muted:  #6B5B4E;
-      --border: #E8D5C0;
-      --white:  #FFFFFF;
-      --green:  #27AE60;
-      --green-lt: #E8F8EE;
-      --gold:   #D4A017;
-      --gold-lt: #FEF8E7;
+      --bg: #0A0A0A; --bg2: #111; --bg3: #1A1A1A; --bg4: #222;
+      --crimson: #C0001D; --gold: #C8A44E;
+      --white: #F5F5F0; --dim: #A09E93; --gray: #666;
+      --green: #2ECC71; --red: #E74C3C; --yellow: #F1C40F; --blue: #3498DB;
+      --radius: 8px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Rajdhani',sans-serif; background:var(--bg); color:var(--white); min-height:100vh; }
 
-      /* Admin-specific */
-      --sidebar-bg: #1A0A05;
-      --sidebar-w: 240px;
-      --topbar-h: 64px;
-      --card-radius: 16px;
-    }
+    /* LOGIN */
+    .login-wrap { display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px; }
+    .login-box { background:var(--bg2); border:1px solid rgba(255,255,255,0.06); padding:50px 40px; width:100%; max-width:420px; }
+    .login-box h1 { font-family:'Bebas Neue',cursive; font-size:2.4rem; letter-spacing:4px; margin-bottom:8px; }
+    .login-box h1 span { color:var(--crimson); }
+    .login-box p { color:var(--dim); margin-bottom:30px; font-size:0.95rem; }
+    .login-box .form-group { margin-bottom:20px; }
+    .login-box label { display:block; font-size:0.75rem; letter-spacing:3px; text-transform:uppercase; color:var(--dim); margin-bottom:8px; }
+    .login-box input { width:100%; padding:14px 16px; background:var(--bg3); border:1px solid rgba(255,255,255,0.08); color:var(--white); font-family:inherit; font-size:1rem; outline:none; transition:border .3s; }
+    .login-box input:focus { border-color:var(--crimson); }
+    .login-box .btn { width:100%; padding:16px; background:var(--crimson); color:#fff; border:none; font-family:'Bebas Neue',cursive; font-size:1.2rem; letter-spacing:4px; cursor:pointer; transition:background .3s; }
+    .login-box .btn:hover { background:#E0002A; }
+    .login-box .btn:disabled { background:var(--gray); cursor:wait; }
+    .login-error { color:var(--red); font-size:0.85rem; margin-top:12px; display:none; }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Sora', sans-serif;
-      background: #F7F0E8;
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-    }
+    /* LAYOUT */
+    .admin-wrap { display:grid; grid-template-columns:240px 1fr; min-height:100vh; }
+    .sidebar { background:var(--bg2); border-right:1px solid rgba(255,255,255,0.06); padding:30px 0; position:sticky; top:0; height:100vh; overflow-y:auto; display:flex; flex-direction:column; }
+    .sidebar-logo { font-family:'Bebas Neue',cursive; font-size:1.6rem; letter-spacing:3px; padding:0 24px 30px; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .sidebar-logo span { color:var(--crimson); }
+    .sidebar-nav { padding:20px 0; flex:1; }
+    .sidebar-nav a { display:flex; align-items:center; gap:12px; padding:14px 24px; color:var(--dim); text-decoration:none; font-size:0.95rem; font-weight:500; letter-spacing:1px; transition:all .2s; border-left:3px solid transparent; }
+    .sidebar-nav a:hover, .sidebar-nav a.active { color:var(--white); background:rgba(192,0,29,0.08); border-left-color:var(--crimson); }
+    .sidebar-bottom { padding:20px 24px; border-top:1px solid rgba(255,255,255,0.06); }
+    .sidebar-bottom a { color:var(--dim); text-decoration:none; font-size:0.85rem; }
+    .sidebar-bottom a:hover { color:var(--crimson); }
 
-    /* ══ SIDEBAR ══ */
-    .sidebar {
-      width: var(--sidebar-w);
-      background: var(--sidebar-bg);
-      min-height: 100vh;
-      position: fixed;
-      left: 0; top: 0; bottom: 0;
-      display: flex;
-      flex-direction: column;
-      z-index: 100;
-      border-right: 1px solid rgba(255,255,255,0.06);
-    }
+    .main { padding:30px 40px; overflow-y:auto; }
+    .main-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; }
+    .main-header h2 { font-family:'Bebas Neue',cursive; font-size:2rem; letter-spacing:3px; }
 
-    .sidebar-brand {
-      padding: 28px 24px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .sidebar-brand .logo-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.2;
-    }
-    .sidebar-brand .logo-sub {
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-    .sidebar-brand .logo-badge {
-      display: inline-block;
-      background: var(--red);
-      color: #fff;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 4px;
-      margin-top: 8px;
-    }
+    /* STATS */
+    .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-bottom:30px; }
+    .stat-card { background:var(--bg2); border:1px solid rgba(255,255,255,0.06); padding:28px 24px; }
+    .stat-card .label { font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--dim); margin-bottom:8px; }
+    .stat-card .value { font-family:'Bebas Neue',cursive; font-size:2.4rem; letter-spacing:2px; }
+    .stat-card .value.green { color:var(--green); }
+    .stat-card .value.gold { color:var(--gold); }
+    .stat-card .value.blue { color:var(--blue); }
+    .stat-card .value.crimson { color:var(--crimson); }
 
-    .sidebar-nav {
-      flex: 1;
-      padding: 20px 12px;
-    }
-    .nav-label {
-      font-size: 0.62rem;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.22);
-      padding: 0 12px;
-      margin-bottom: 8px;
-      margin-top: 20px;
-    }
-    .nav-label:first-child { margin-top: 0; }
+    /* TABLE */
+    .data-table { width:100%; border-collapse:collapse; margin-top:20px; }
+    .data-table th { font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--dim); text-align:left; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,0.1); }
+    .data-table td { padding:14px 16px; border-bottom:1px solid rgba(255,255,255,0.04); font-size:0.95rem; color:var(--dim); vertical-align:middle; }
+    .data-table tr:hover td { background:rgba(255,255,255,0.02); }
 
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      padding: 10px 14px;
-      border-radius: 10px;
-      cursor: pointer;
-      color: rgba(255,255,255,0.5);
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: all 0.18s;
-      margin-bottom: 2px;
-      text-decoration: none;
-    }
-    .nav-item:hover {
-      background: rgba(255,255,255,0.07);
-      color: rgba(255,255,255,0.85);
-    }
-    .nav-item.active {
-      background: var(--red);
-      color: #fff;
-    }
-    .nav-item .nav-icon {
-      font-size: 1rem;
-      width: 20px;
-      text-align: center;
-    }
-    .nav-item .nav-badge {
-      margin-left: auto;
-      background: var(--gold);
-      color: #1A1008;
-      font-size: 0.6rem;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 10px;
+    /* BADGES */
+    .badge { padding:4px 12px; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; font-weight:600; display:inline-block; }
+    .badge-green { background:rgba(46,204,113,0.15); color:var(--green); }
+    .badge-yellow { background:rgba(241,196,15,0.15); color:var(--yellow); }
+    .badge-red { background:rgba(231,76,60,0.15); color:var(--red); }
+
+    /* BUTTONS */
+    .btn-sm { padding:8px 16px; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; border:none; cursor:pointer; font-family:inherit; font-weight:600; transition:all .2s; }
+    .btn-crimson { background:var(--crimson); color:#fff; }
+    .btn-crimson:hover { background:#E0002A; }
+    .btn-outline { background:transparent; color:var(--dim); border:1px solid rgba(255,255,255,0.1); }
+    .btn-outline:hover { border-color:var(--crimson); color:var(--white); }
+    .btn-danger { background:transparent; color:var(--red); border:1px solid rgba(231,76,60,0.3); }
+    .btn-danger:hover { background:rgba(231,76,60,0.1); }
+
+    /* MODAL */
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:1000; align-items:center; justify-content:center; padding:20px; }
+    .modal-overlay.show { display:flex; }
+    .modal { background:var(--bg2); border:1px solid rgba(255,255,255,0.08); padding:40px; width:100%; max-width:520px; max-height:90vh; overflow-y:auto; }
+    .modal h3 { font-family:'Bebas Neue',cursive; font-size:1.6rem; letter-spacing:3px; margin-bottom:24px; }
+    .modal .form-group { margin-bottom:16px; }
+    .modal label { display:block; font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--dim); margin-bottom:6px; }
+    .modal input, .modal select, .modal textarea { width:100%; padding:12px 14px; background:var(--bg3); border:1px solid rgba(255,255,255,0.08); color:var(--white); font-family:inherit; font-size:0.95rem; outline:none; }
+    .modal input:focus, .modal select:focus, .modal textarea:focus { border-color:var(--crimson); }
+    .modal textarea { min-height:80px; resize:vertical; }
+    .modal-actions { display:flex; gap:12px; margin-top:24px; justify-content:flex-end; }
+
+    /* PAGE SECTIONS */
+    .page-section { display:none; }
+    .page-section.active { display:block; }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+      .admin-wrap { grid-template-columns:1fr; }
+      .sidebar { display:none; }
+      .stats-grid { grid-template-columns:repeat(2,1fr); }
+      .main { padding:20px; }
     }
 
-    .sidebar-footer {
-      padding: 16px 12px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-    }
-    .sidebar-footer a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 10px;
-      color: rgba(255,255,255,0.4);
-      font-size: 0.82rem;
-      text-decoration: none;
-      transition: all 0.18s;
-    }
-    .sidebar-footer a:hover { color: rgba(255,255,255,0.7); }
-
-    /* ══ MAIN AREA ══ */
-    .main {
-      margin-left: var(--sidebar-w);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    /* ══ TOPBAR ══ */
-    .topbar {
-      height: var(--topbar-h);
-      background: rgba(253,246,238,0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 28px;
-    }
-    .topbar-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--text);
-    }
-    .topbar-title span {
-      color: var(--muted);
-      font-weight: 400;
-      font-size: 0.82rem;
-      margin-left: 8px;
-    }
-    .topbar-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .admin-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: var(--red);
-      color: #fff;
-      font-size: 0.85rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .topbar-time {
-      font-size: 0.78rem;
-      color: var(--muted);
-      padding: 5px 12px;
-      background: var(--warm);
-      border-radius: 20px;
-    }
-
-    /* ══ CONTENT ══ */
-    .content {
-      padding: 28px;
-      flex: 1;
-    }
-
-    /* ══ PAGE SECTION ══ */
-    .page-section { display: none; }
-    .page-section.active { display: block; }
-
-    /* ══ STATS ROW ══ */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-    .stat-card {
-      background: var(--white);
-      border-radius: var(--card-radius);
-      padding: 20px 22px;
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .stat-card:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
-      transform: translateY(-2px);
-    }
-    .stat-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-    }
-    .stat-card.red::after { background: var(--red); }
-    .stat-card.green::after { background: var(--green); }
-    .stat-card.gold::after { background: var(--gold); }
-    .stat-card.brown::after { background: var(--brown); }
-
-    .stat-card-icon {
-      font-size: 1.6rem;
-      margin-bottom: 10px;
-    }
-    .stat-card-val {
-      font-size: 1.55rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1;
-    }
-    .stat-card-lbl {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-    .stat-card-trend {
-      position: absolute;
-      top: 20px; right: 18px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
-    .trend-up { background: var(--green-lt); color: var(--green); }
-    .trend-new { background: var(--gold-lt); color: var(--gold); }
-
-    /* ══ SECTION HEADER ══ */
-    .sec-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-    .sec-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .sec-title small {
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-weight: 400;
-      margin-left: 6px;
-    }
-
-    /* ══ ACTION BUTTON ══ */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 18px;
-      border-radius: 9px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      font-family: 'Sora', sans-serif;
-      transition: all 0.17s;
-    }
-    .btn-red { background: var(--red); color: #fff; }
-    .btn-red:hover { background: var(--red-dk); transform: translateY(-1px); }
-    .btn-green { background: var(--green); color: #fff; }
-    .btn-green:hover { filter: brightness(0.9); transform: translateY(-1px); }
-    .btn-outline {
-      background: transparent;
-      border: 1.5px solid var(--border);
-      color: var(--muted);
-    }
-    .btn-outline:hover { border-color: var(--red); color: var(--red); }
-    .btn-sm { padding: 6px 12px; font-size: 0.76rem; }
-
-    /* ══ CARD ══ */
-    .card {
-      background: var(--white);
-      border-radius: var(--card-radius);
-      border: 1px solid var(--border);
-      padding: 24px;
-      margin-bottom: 20px;
-    }
-
-    /* ══ FORM PRODUK ══ */
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .form-grid .span-2 { grid-column: span 2; }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .field label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    .field input,
-    .field textarea,
-    .field select {
-      padding: 10px 13px;
-      border: 1.5px solid var(--border);
-      border-radius: 9px;
-      font-family: 'Sora', sans-serif;
-      font-size: 0.85rem;
-      color: var(--text);
-      background: #FDFAF6;
-      transition: border 0.15s;
-      outline: none;
-    }
-    .field input:focus,
-    .field textarea:focus,
-    .field select:focus {
-      border-color: var(--red);
-      background: #fff;
-    }
-    .field textarea { resize: vertical; min-height: 75px; }
-
-    /* ══ PRODUK LIST ══ */
-    .produk-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
-    .produk-item {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 16px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      transition: all 0.18s;
-    }
-    .produk-item:hover {
-      border-color: var(--red);
-      box-shadow: 0 4px 16px rgba(192,57,43,0.08);
-    }
-    .produk-img-thumb {
-      width: 64px;
-      height: 64px;
-      border-radius: 10px;
-      background: var(--warm);
-      overflow: hidden;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .produk-img-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .produk-img-thumb .no-img {
-      font-size: 1.8rem;
-    }
-    .produk-info { flex: 1; min-width: 0; }
-    .produk-name {
-      font-weight: 700;
-      font-size: 0.88rem;
-      color: var(--text);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .produk-cat {
-      display: inline-block;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 5px;
-      margin: 4px 0;
-    }
-    .cat-sapi { background: #FFF0EE; color: var(--red); }
-    .cat-ayam { background: #FFF8E8; color: #B8860B; }
-    .cat-olahan { background: #EEF0FF; color: #5B6FCB; }
-    .cat-default { background: var(--warm); color: var(--brown); }
-
-    .produk-price {
-      font-weight: 700;
-      color: var(--red);
-      font-size: 0.9rem;
-      margin-top: 2px;
-    }
-    .produk-actions {
-      display: flex;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    /* ══ EMPTY STATE ══ */
-    .empty-state {
-      text-align: center;
-      padding: 48px 24px;
-      color: var(--muted);
-    }
-    .empty-state .empty-icon { font-size: 3rem; margin-bottom: 12px; }
-    .empty-state p { font-size: 0.88rem; }
-
-    /* ══ LOADING ══ */
-    .loading-skeleton {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
-    .skeleton-box {
-      height: 100px;
-      background: linear-gradient(90deg, #F0E8DF 25%, #F8F2EB 50%, #F0E8DF 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.4s infinite;
-      border-radius: 13px;
-    }
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-
-    /* ══ PESANAN CARD ══ */
-    .pesanan-list { display: flex; flex-direction: column; gap: 16px; }
-    .pesanan-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--card-radius);
-      overflow: hidden;
-      transition: all 0.18s;
-    }
-    .pesanan-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
-
-    .pesanan-header {
-      background: #FDFAF6;
-      border-bottom: 1px solid var(--border);
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .pesanan-customer {
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-    .pesanan-hp {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 1px;
-    }
-    .pesanan-meta {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .meta-chip {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.72rem;
-      padding: 4px 10px;
-      border-radius: 20px;
-      background: var(--warm);
-      color: var(--muted);
-    }
-    .pesanan-body {
-      padding: 16px 20px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: start;
-    }
-    .pesanan-items { flex: 1; }
-    .pesanan-item-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.82rem;
-      padding: 5px 0;
-      border-bottom: 1px dashed var(--border);
-      color: var(--text);
-    }
-    .pesanan-item-row:last-child { border-bottom: none; }
-    .pesanan-item-qty { color: var(--muted); }
-    .pesanan-item-subtotal { font-weight: 600; color: var(--red); }
-
-    .pesanan-total-box {
-      background: var(--red);
-      color: #fff;
-      border-radius: 11px;
-      padding: 14px 18px;
-      text-align: right;
-      min-width: 140px;
-    }
-    .pesanan-total-label { font-size: 0.68rem; opacity: 0.8; letter-spacing: 1px; text-transform: uppercase; }
-    .pesanan-total-val { font-size: 1.2rem; font-weight: 700; margin-top: 2px; }
-
-    .pesanan-footer {
-      padding: 12px 20px;
-      border-top: 1px solid var(--border);
-      background: #FDFAF6;
-    }
-    .pesanan-alamat {
-      font-size: 0.78rem;
-      color: var(--muted);
-      display: flex;
-      align-items: flex-start;
-      gap: 6px;
-    }
-    .pesanan-catatan {
-      font-size: 0.75rem;
-      color: var(--brown);
-      margin-top: 5px;
-      padding: 5px 10px;
-      background: var(--gold-lt);
-      border-radius: 6px;
-      border-left: 3px solid var(--gold);
-    }
-
-    /* ══ MODAL ══ */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 300;
-      background: rgba(26,10,5,0.6);
-      backdrop-filter: blur(4px);
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal-box {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 32px;
-      max-width: 480px;
-      width: 90%;
-      animation: popIn 0.25s ease;
-    }
-    @keyframes popIn {
-      from { transform: scale(0.93) translateY(8px); opacity: 0; }
-      to   { transform: scale(1) translateY(0); opacity: 1; }
-    }
-    .modal-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-    }
-    .modal-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-      margin-top: 24px;
-    }
-
-    /* ══ TOAST ══ */
-    .toast-container {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 400;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .toast {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      border-radius: 11px;
-      font-size: 0.83rem;
-      font-weight: 500;
-      color: #fff;
-      min-width: 240px;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.18);
-      animation: slideIn 0.25s ease;
-    }
-    .toast.success { background: var(--green); }
-    .toast.error { background: var(--red); }
-    .toast.warning { background: var(--gold); color: #1A1008; }
-    @keyframes slideIn {
-      from { transform: translateX(20px); opacity: 0; }
-      to   { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes slideOut {
-      from { transform: translateX(0); opacity: 1; }
-      to   { transform: translateX(20px); opacity: 0; }
-    }
-    .toast.hiding { animation: slideOut 0.2s ease forwards; }
-
-    /* ══ SCROLLBAR ══ */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
-
-    /* ══ DIVIDER SECTION ══ */
-    .divider-dashed {
-      border: none;
-      border-top: 1.5px dashed var(--border);
-      margin: 20px 0;
-    }
-
-    /* ══ RESPONSIVE ══ */
-    @media (max-width: 1024px) {
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 768px) {
-      :root { --sidebar-w: 0px; }
-      .sidebar { display: none; }
-      .main { margin-left: 0; }
-      .form-grid { grid-template-columns: 1fr; }
-      .form-grid .span-2 { grid-column: span 1; }
-      .pesanan-body { grid-template-columns: 1fr; }
-    }
+    .hidden { display:none !important; }
+    .loading-text { color:var(--dim); padding:40px; text-align:center; }
   </style>
 </head>
 <body>
 
-  <!-- ══ SIDEBAR ══ -->
-  <aside class="sidebar">
-    <div class="sidebar-brand">
-      <div class="logo-text">🥩 Bunda Raya</div>
-      <div class="logo-sub">Kitchen</div>
-      <span class="logo-badge">Admin Panel</span>
+<!-- ==================== LOGIN SCREEN ==================== -->
+<div id="login-screen" class="login-wrap">
+  <div class="login-box">
+    <h1>BAROKAH <span>GYM</span></h1>
+    <p>Admin Panel — Masuk untuk mengelola data gym</p>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="login-email" placeholder="admin@barokahgym.com" />
     </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="••••••••" />
+    </div>
+    <button class="btn" id="login-btn" onclick="doLogin()">MASUK</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
 
+<!-- ==================== ADMIN DASHBOARD ==================== -->
+<div id="admin-screen" class="admin-wrap hidden">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">BAROKAH <span>GYM</span></div>
     <nav class="sidebar-nav">
-      <div class="nav-label">Menu Utama</div>
-      <div class="nav-item active" onclick="showSection('produk', this)">
-        <span class="nav-icon">📦</span> Kelola Etalase
-      </div>
-      <div class="nav-item" onclick="showSection('pesanan', this)">
-        <span class="nav-icon">📝</span> Pesanan Masuk
-        <span class="nav-badge" id="pesanan-count">—</span>
-      </div>
-
-      <div class="nav-label">Lainnya</div>
-      <a class="nav-item" href="index.html" target="_blank">
-        <span class="nav-icon">🛒</span> Lihat Toko
-      </a>
+      <a href="#" class="active" data-page="dashboard">📊 Dashboard</a>
+      <a href="#" data-page="membership">💳 Paket Membership</a>
+      <a href="#" data-page="trainers">🏋️ Personal Trainer</a>
+      <a href="#" data-page="kelas">📅 Kelas Grup</a>
+      <a href="#" data-page="jam">🕐 Jam Operasional</a>
+      <a href="#" data-page="members">👥 Data Member</a>
+      <a href="#" data-page="pendaftaran">📋 Pendaftaran</a>
     </nav>
-
-    <div class="sidebar-footer">
-      <a href="#" onclick="return false;">
-        <span>⚙️</span> Pengaturan
-      </a>
+    <div class="sidebar-bottom">
+      <a href="#" onclick="doLogout()">🚪 Keluar</a>
     </div>
   </aside>
 
-  <!-- ══ MAIN ══ -->
+  <!-- MAIN CONTENT -->
   <div class="main">
 
-    <!-- TOPBAR -->
-    <header class="topbar">
-      <div class="topbar-title">
-        <span id="topbar-page-name">Kelola Etalase</span>
-        <span id="topbar-time-el">—</span>
+    <!-- === DASHBOARD === -->
+    <div class="page-section active" id="page-dashboard">
+      <div class="main-header"><h2>DASHBOARD</h2></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="label">Member Aktif</div><div class="value green" id="s-member">-</div></div>
+        <div class="stat-card"><div class="label">Pendaftaran Pending</div><div class="value gold" id="s-pending">-</div></div>
+        <div class="stat-card"><div class="label">Trainer Aktif</div><div class="value blue" id="s-trainer">-</div></div>
+        <div class="stat-card"><div class="label">Total Pendapatan</div><div class="value crimson" id="s-revenue">-</div></div>
       </div>
-      <div class="topbar-actions">
-        <div class="admin-avatar">A</div>
+      <h3 style="font-family:'Bebas Neue',cursive;letter-spacing:2px;margin:20px 0 10px;">PENDAFTARAN TERBARU</h3>
+      <table class="data-table">
+        <thead><tr><th>Nama</th><th>Paket</th><th>Tanggal</th><th>Status Bayar</th></tr></thead>
+        <tbody id="recent-reg"><tr><td colspan="4" class="loading-text">Memuat...</td></tr></tbody>
+      </table>
+    </div>
+
+    <!-- === PAKET MEMBERSHIP === -->
+    <div class="page-section" id="page-membership">
+      <div class="main-header">
+        <h2>PAKET MEMBERSHIP</h2>
+        <button class="btn-sm btn-crimson" onclick="openModal('paket')">+ TAMBAH PAKET</button>
       </div>
-    </header>
+      <table class="data-table">
+        <thead><tr><th>Nama Paket</th><th>Durasi</th><th>Harga</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody id="tbl-paket"><tr><td colspan="5" class="loading-text">Memuat...</td></tr></tbody>
+      </table>
+    </div>
 
-    <!-- CONTENT -->
-    <div class="content">
-
-      <!-- STATS -->
-      <div class="stats-row">
-        <div class="stat-card red">
-          <div class="stat-card-icon">📦</div>
-          <div class="stat-card-val" id="stat-total-produk">—</div>
-          <div class="stat-card-lbl">Total Produk</div>
-        </div>
-        <div class="stat-card green">
-          <span class="stat-card-trend trend-up" id="stat-pesanan-badge">Live</span>
-          <div class="stat-card-icon">📝</div>
-          <div class="stat-card-val" id="stat-total-pesanan">—</div>
-          <div class="stat-card-lbl">Pesanan Masuk</div>
-        </div>
-        <div class="stat-card gold">
-          <div class="stat-card-icon">💰</div>
-          <div class="stat-card-val" id="stat-total-omset" style="font-size:1.1rem;">—</div>
-          <div class="stat-card-lbl">Total Omset</div>
-        </div>
-        <div class="stat-card brown">
-          <div class="stat-card-icon">🗂️</div>
-          <div class="stat-card-val" id="stat-kategori">—</div>
-          <div class="stat-card-lbl">Kategori Aktif</div>
-        </div>
+    <!-- === PERSONAL TRAINER === -->
+    <div class="page-section" id="page-trainers">
+      <div class="main-header">
+        <h2>PERSONAL TRAINER</h2>
+        <button class="btn-sm btn-crimson" onclick="openModal('trainer')">+ TAMBAH TRAINER</button>
       </div>
+      <table class="data-table">
+        <thead><tr><th>Nama</th><th>Spesialisasi</th><th>Sertifikasi</th><th>Harga/Sesi</th><th>Status</th><th>Aksi</th></tr></thead>
+        <tbody id="tbl-trainer"><tr><td colspan="6" class="loading-text">Memuat...</td></tr></tbody>
+      </table>
+    </div>
 
-      <!-- ══ SECTION: PRODUK ══ -->
-      <div id="section-produk" class="page-section active">
-
-        <!-- FORM TAMBAH PRODUK -->
-        <div class="card">
-          <div class="sec-header">
-            <div class="sec-title">+ Tambah Produk Baru</div>
-          </div>
-          <div class="form-grid">
-            <div class="field">
-              <label>Nama Produk</label>
-              <input type="text" id="nama" placeholder="ex: Daging Sapi Paha Belakang">
-            </div>
-            <div class="field">
-              <label>Kategori</label>
-              <select id="kategori">
-                <option value="">— Pilih Kategori —</option>
-                <option value="sapi">🐄 Sapi</option>
-                <option value="ayam">🐔 Ayam</option>
-                <option value="sliced beef">🥩 Sliced Beef</option>
-                <option value="olahan">🍖 Olahan</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Harga (Rp)</label>
-              <input type="number" id="harga" placeholder="ex: 120000">
-            </div>
-            <div class="field">
-              <label>Link Foto Produk</label>
-              <input type="text" id="gambar_url" placeholder="https://...">
-            </div>
-            <div class="field span-2">
-              <label>Deskripsi Singkat</label>
-              <textarea id="deskripsi" placeholder="Ceritakan keunggulan produk ini..."></textarea>
-            </div>
-          </div>
-          <div style="margin-top:16px; display:flex; justify-content:flex-end; gap:10px;">
-            <button class="btn btn-outline" onclick="resetForm()">✕ Reset</button>
-            <button class="btn btn-green" onclick="tambahProduk()">+ Simpan ke Etalase</button>
-          </div>
-        </div>
-
-        <!-- DAFTAR PRODUK -->
-        <div class="sec-header" style="margin-top:4px;">
-          <div class="sec-title">Etalase Saat Ini <small id="produk-count-label"></small></div>
-          <button class="btn btn-outline btn-sm" onclick="muatProduk()">🔄 Refresh</button>
-        </div>
-        <div id="list-produk">
-          <div class="loading-skeleton">
-            <div class="skeleton-box"></div>
-            <div class="skeleton-box"></div>
-            <div class="skeleton-box"></div>
-          </div>
-        </div>
+    <!-- === KELAS GRUP === -->
+    <div class="page-section" id="page-kelas">
+      <div class="main-header">
+        <h2>KELAS GRUP</h2>
+        <button class="btn-sm btn-crimson" onclick="openModal('kelas')">+ TAMBAH KELAS</button>
       </div>
+      <table class="data-table">
+        <thead><tr><th>Nama Kelas</th><th>Hari</th><th>Jam</th><th>Durasi</th><th>Lokasi</th><th>Trainer</th><th>Aksi</th></tr></thead>
+        <tbody id="tbl-kelas"><tr><td colspan="7" class="loading-text">Memuat...</td></tr></tbody>
+      </table>
+    </div>
 
-      <!-- ══ SECTION: PESANAN ══ -->
-      <div id="section-pesanan" class="page-section">
-        <div class="sec-header">
-          <div class="sec-title">Pesanan Masuk <small id="pesanan-count-label"></small></div>
-          <button class="btn btn-outline btn-sm" onclick="muatPesanan()">🔄 Refresh</button>
-        </div>
-        <div id="list-pesanan">
-          <div class="loading-skeleton">
-            <div class="skeleton-box" style="height:160px;"></div>
-            <div class="skeleton-box" style="height:160px;"></div>
-          </div>
-        </div>
+    <!-- === JAM OPERASIONAL === -->
+    <div class="page-section" id="page-jam">
+      <div class="main-header">
+        <h2>JAM OPERASIONAL</h2>
+        <button class="btn-sm btn-crimson" onclick="openModal('jam')">+ TAMBAH JAM</button>
       </div>
+      <table class="data-table">
+        <thead><tr><th>Tipe Hari</th><th>Jam Buka</th><th>Jam Tutup</th><th>Keterangan</th><th>Aksi</th></tr></thead>
+        <tbody id="tbl-jam"><tr><td colspan="5" class="loading-text">Memuat...</td></tr></tbody>
+      </table>
+    </div>
 
-    </div><!-- /content -->
-  </div><!-- /main -->
+    <!-- === DATA MEMBER === -->
+    <div class="page-section" id="page-members">
+      <div class="main-header"><h2>DATA MEMBER</h2></div>
+      <table class="data-table">
+        <thead><tr><th>Nama</th><th>WhatsApp</th><th>Email</th><th>Status</th><th>Terdaftar</th><th>Aksi</th></tr></thead>
+        <tbody id="tbl-member"><tr><td colspan="6" class="loading-text">Memuat...</td></tr></tbody>
+      </table>
+    </div>
 
-  <!-- TOAST CONTAINER -->
-  <div class="toast-container" id="toast-container"></div>
+    <!-- === PENDAFTARAN === -->
+    <div class="page-section" id="page-pendaftaran">
+      <div class="main-header"><h2>PENDAFTARAN MEMBERSHIP</h2></div>
+      <table class="data-table">
+        <thead><tr><th>Member</th><th>Paket</th><th>Mulai</th><th>Selesai</th><th>Total</th><th>Bayar</th><th>Aksi</th></tr></thead>
+        <tbody id="tbl-pendaftaran"><tr><td colspan="7" class="loading-text">Memuat...</td></tr></tbody>
+      </table>
+    </div>
 
-  <!-- MODAL HAPUS KONFIRMASI -->
-  <div class="modal-overlay" id="modal-hapus">
-    <div class="modal-box">
-      <div class="modal-title">🗑️ Konfirmasi Hapus Produk</div>
-      <p style="font-size:0.88rem; color:var(--muted); line-height:1.6;">
-        Apakah kamu yakin ingin menghapus produk ini dari etalase?<br>
-        <strong style="color:var(--red);" id="modal-hapus-nama">—</strong>
-      </p>
-      <div class="modal-actions">
-        <button class="btn btn-outline" onclick="tutupModal()">Batal</button>
-        <button class="btn btn-red" onclick="konfirmasiHapus()">Ya, Hapus</button>
-      </div>
+  </div>
+</div>
+
+<!-- ==================== MODAL ==================== -->
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <h3 id="modal-title">Tambah Data</h3>
+    <div id="modal-body"></div>
+    <div class="modal-actions">
+      <button class="btn-sm btn-outline" onclick="closeModal()">BATAL</button>
+      <button class="btn-sm btn-crimson" id="modal-save" onclick="saveModal()">SIMPAN</button>
     </div>
   </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="admin.js"></script>
-  <script>
-    // Clock
-    function updateClock() {
-      const now = new Date();
-      const opts = { weekday:'short', day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' };
-      document.getElementById('topbar-time-el').textContent = now.toLocaleDateString('id-ID', opts);
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SUPABASE_URL = 'https://crvoayijouaekggqkeup.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNydm9heWlqb3VhZWtnZ3FrZXVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA2MzczNTEsImV4cCI6MjA5NjIxMzM1MX0.d3HvyUEk3d0vnDJOqIKE8eyAaX9_q_5n__hKNpQONUU';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let currentModal = null;
+let editId = null;
+let trainerCache = [];
+let currentTrainerFotoUrl = null;
+let removeFotoFlag = false;
+
+function previewFoto(input) {
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    if (file.size > 2 * 1024 * 1024) {
+      alert('File terlalu besar! Maksimal 2MB.');
+      input.value = '';
+      return;
     }
-    updateClock();
-    setInterval(updateClock, 30000);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      document.getElementById('foto-preview').innerHTML =
+        `<img src="${e.target.result}" style="width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid rgba(255,255,255,0.1);" />`;
+    };
+    reader.readAsDataURL(file);
+    removeFotoFlag = false;
+  }
+}
 
-    // Page names mapping
-    const pageNames = { produk: 'Kelola Etalase', pesanan: 'Pesanan Masuk' };
+function removeFotoPreview() {
+  document.getElementById('foto-preview').innerHTML =
+    `<div style="width:80px;height:80px;background:var(--bg3);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--dim);border-radius:4px;">Tanpa foto</div>`;
+  const fileInput = document.getElementById('m-foto');
+  if (fileInput) fileInput.value = '';
+  removeFotoFlag = true;
+}
 
-    function showSection(name, el) {
-      document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-      document.getElementById('section-' + name).classList.add('active');
+function fmt(n) { return new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0,maximumFractionDigits:0}).format(n); }
+function fmtDate(d) { return d ? new Date(d).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'}) : '-'; }
+function fmtTime(t) { return t ? t.substring(0,5) : '-'; }
+function badgeHTML(status) {
+  const map = { aktif:'badge-green', lunas:'badge-green', tersedia:'badge-green', terkonfirmasi:'badge-green', selesai:'badge-green', pending:'badge-yellow', tidak_aktif:'badge-red', gagal:'badge-red', dibatalkan:'badge-red' };
+  return `<span class="badge ${map[status]||'badge-yellow'}">${status}</span>`;
+}
 
-      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-      if (el) el.classList.add('active');
+// ============ AUTH ============
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const errEl = document.getElementById('login-error');
+  const btn = document.getElementById('login-btn');
+  errEl.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'MEMPROSES...';
 
-      document.getElementById('topbar-page-name').textContent = pageNames[name] || name;
+  const { error } = await sb.auth.signInWithPassword({ email, password: pass });
+  if (error) {
+    errEl.textContent = 'Login gagal: ' + error.message;
+    errEl.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'MASUK';
+    return;
+  }
+  showAdmin();
+}
 
-      if (name === 'pesanan') muatPesanan();
+async function doLogout() {
+  await sb.auth.signOut();
+  document.getElementById('admin-screen').classList.add('hidden');
+  document.getElementById('login-screen').classList.remove('hidden');
+}
+
+async function checkSession() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) showAdmin();
+}
+
+function showAdmin() {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('admin-screen').classList.remove('hidden');
+  loadDashboard();
+}
+
+// ============ NAVIGATION ============
+document.querySelectorAll('.sidebar-nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.sidebar-nav a').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    const page = link.dataset.page;
+    document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    loadPage(page);
+  });
+});
+
+function loadPage(page) {
+  const loaders = { dashboard:loadDashboard, membership:loadPaket, trainers:loadTrainers, kelas:loadKelas, jam:loadJam, members:loadMembers, pendaftaran:loadPendaftaran };
+  if (loaders[page]) loaders[page]();
+}
+
+// ============ DASHBOARD ============
+async function loadDashboard() {
+  const [members, pending, trainers, revenue] = await Promise.all([
+    sb.from('member').select('*',{count:'exact',head:true}).eq('status','aktif'),
+    sb.from('pendaftaran_membership').select('*',{count:'exact',head:true}).eq('status_bayar','pending'),
+    sb.from('personal_trainer').select('*',{count:'exact',head:true}).eq('is_tersedia',true),
+    sb.from('pendaftaran_membership').select('total_bayar').eq('status_bayar','lunas')
+  ]);
+  document.getElementById('s-member').textContent = members.count || 0;
+  document.getElementById('s-pending').textContent = pending.count || 0;
+  document.getElementById('s-trainer').textContent = trainers.count || 0;
+  const totalRev = (revenue.data||[]).reduce((s,r) => s + Number(r.total_bayar), 0);
+  document.getElementById('s-revenue').textContent = fmt(totalRev);
+
+  const { data:regs } = await sb.from('pendaftaran_membership').select('*, member(nama_depan,nama_belakang), paket_membership(nama_paket)').order('created_at',{ascending:false}).limit(5);
+  document.getElementById('recent-reg').innerHTML = (regs||[]).map(r => `<tr>
+    <td style="color:var(--white)">${r.member?.nama_depan||''} ${r.member?.nama_belakang||''}</td>
+    <td>${r.paket_membership?.nama_paket||'-'}</td>
+    <td>${fmtDate(r.created_at)}</td>
+    <td>${badgeHTML(r.status_bayar)}</td>
+  </tr>`).join('') || '<tr><td colspan="4" style="color:var(--dim)">Belum ada data</td></tr>';
+}
+
+// ============ PAKET ============
+async function loadPaket() {
+  const { data } = await sb.from('paket_membership').select('*').order('harga');
+  document.getElementById('tbl-paket').innerHTML = (data||[]).map(p => `<tr>
+    <td style="color:var(--white)">${p.nama_paket}</td>
+    <td>${p.durasi_hari} hari</td>
+    <td style="color:var(--gold)">${fmt(p.harga)}</td>
+    <td>${p.is_aktif ? badgeHTML('aktif') : badgeHTML('tidak_aktif')}</td>
+    <td>
+      <button class="btn-sm btn-outline" onclick="editPaket(${p.id_paket})">Edit</button>
+      <button class="btn-sm btn-danger" onclick="deletePaket(${p.id_paket})">Hapus</button>
+    </td>
+  </tr>`).join('') || '<tr><td colspan="5" style="color:var(--dim)">Belum ada paket</td></tr>';
+}
+
+async function editPaket(id) {
+  const { data } = await sb.from('paket_membership').select('*').eq('id_paket',id).single();
+  if (data) openModal('paket', data);
+}
+async function deletePaket(id) {
+  if (!confirm('Hapus paket ini?')) return;
+  await sb.from('paket_membership').delete().eq('id_paket',id);
+  loadPaket();
+}
+
+// ============ TRAINERS ============
+async function loadTrainers() {
+  const { data } = await sb.from('personal_trainer').select('*').order('id_trainer');
+  trainerCache = data || [];
+  document.getElementById('tbl-trainer').innerHTML = (data||[]).map(t => {
+    const foto = t.foto_url
+      ? `<img src="${t.foto_url}" style="width:40px;height:40px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-right:8px;" />`
+      : `<span style="margin-right:8px;">${t.emoji||'🏋️'}</span>`;
+    return `<tr>
+    <td style="color:var(--white)">${foto}${t.nama}</td>
+    <td>${t.spesialisasi}</td>
+    <td>${t.sertifikasi||'-'}</td>
+    <td style="color:var(--gold)">${fmt(t.harga_per_sesi)}</td>
+    <td>${t.is_tersedia ? badgeHTML('aktif') : badgeHTML('tidak_aktif')}</td>
+    <td>
+      <button class="btn-sm btn-outline" onclick="editTrainer(${t.id_trainer})">Edit</button>
+      <button class="btn-sm btn-danger" onclick="deleteTrainer(${t.id_trainer})">Hapus</button>
+    </td>
+  </tr>`;
+  }).join('') || '<tr><td colspan="6" style="color:var(--dim)">Belum ada trainer</td></tr>';
+}
+
+async function editTrainer(id) {
+  const { data } = await sb.from('personal_trainer').select('*').eq('id_trainer',id).single();
+  if (data) openModal('trainer', data);
+}
+async function deleteTrainer(id) {
+  if (!confirm('Hapus trainer ini?')) return;
+  await sb.from('personal_trainer').delete().eq('id_trainer',id);
+  loadTrainers();
+}
+
+// ============ KELAS ============
+async function loadKelas() {
+  if (!trainerCache.length) {
+    const { data } = await sb.from('personal_trainer').select('*');
+    trainerCache = data || [];
+  }
+  const { data } = await sb.from('kelas_grup').select('*, personal_trainer(nama)').order('jam_mulai');
+  document.getElementById('tbl-kelas').innerHTML = (data||[]).map(k => `<tr>
+    <td style="color:var(--white)">${k.nama_kelas}</td>
+    <td>${k.hari}</td>
+    <td>${fmtTime(k.jam_mulai)}</td>
+    <td>${k.durasi_menit} mnt</td>
+    <td>${k.lokasi||'-'}</td>
+    <td>${k.personal_trainer?.nama||'-'}</td>
+    <td>
+      <button class="btn-sm btn-outline" onclick="editKelas(${k.id_kelas})">Edit</button>
+      <button class="btn-sm btn-danger" onclick="deleteKelas(${k.id_kelas})">Hapus</button>
+    </td>
+  </tr>`).join('') || '<tr><td colspan="7" style="color:var(--dim)">Belum ada kelas</td></tr>';
+}
+
+async function editKelas(id) {
+  const { data } = await sb.from('kelas_grup').select('*').eq('id_kelas',id).single();
+  if (data) openModal('kelas', data);
+}
+async function deleteKelas(id) {
+  if (!confirm('Hapus kelas ini?')) return;
+  await sb.from('kelas_grup').delete().eq('id_kelas',id);
+  loadKelas();
+}
+
+// ============ JAM OPERASIONAL ============
+async function loadJam() {
+  const { data } = await sb.from('jam_operasional').select('*').order('id');
+  document.getElementById('tbl-jam').innerHTML = (data||[]).map(j => `<tr>
+    <td style="color:var(--white)">${j.tipe_hari}</td>
+    <td>${fmtTime(j.jam_buka)}</td>
+    <td>${fmtTime(j.jam_tutup)}</td>
+    <td>${j.keterangan||'-'}</td>
+    <td>
+      <button class="btn-sm btn-outline" onclick="editJam(${j.id})">Edit</button>
+      <button class="btn-sm btn-danger" onclick="deleteJam(${j.id})">Hapus</button>
+    </td>
+  </tr>`).join('') || '<tr><td colspan="5" style="color:var(--dim)">Belum ada data</td></tr>';
+}
+
+async function editJam(id) {
+  const { data } = await sb.from('jam_operasional').select('*').eq('id',id).single();
+  if (data) openModal('jam', data);
+}
+async function deleteJam(id) {
+  if (!confirm('Hapus jam operasional ini?')) return;
+  await sb.from('jam_operasional').delete().eq('id',id);
+  loadJam();
+}
+
+// ============ MEMBERS ============
+async function loadMembers() {
+  const { data } = await sb.from('member').select('*').order('created_at',{ascending:false});
+  document.getElementById('tbl-member').innerHTML = (data||[]).map(m => `<tr>
+    <td style="color:var(--white)">${m.nama_depan} ${m.nama_belakang||''}</td>
+    <td>${m.no_whatsapp}</td>
+    <td>${m.email||'-'}</td>
+    <td>${badgeHTML(m.status)}</td>
+    <td>${fmtDate(m.created_at)}</td>
+    <td>
+      ${m.status==='pending'?`<button class="btn-sm btn-crimson" onclick="setMemberStatus(${m.id_member},'aktif')">Aktivasi</button>`:''}
+      ${m.status==='aktif'?`<button class="btn-sm btn-outline" onclick="setMemberStatus(${m.id_member},'tidak_aktif')">Nonaktifkan</button>`:''}
+      ${m.status==='tidak_aktif'?`<button class="btn-sm btn-outline" onclick="setMemberStatus(${m.id_member},'aktif')">Aktifkan</button>`:''}
+    </td>
+  </tr>`).join('') || '<tr><td colspan="6" style="color:var(--dim)">Belum ada member</td></tr>';
+}
+
+async function setMemberStatus(id, status) {
+  await sb.from('member').update({status, updated_at:new Date().toISOString()}).eq('id_member',id);
+  loadMembers();
+}
+
+// ============ PENDAFTARAN ============
+async function loadPendaftaran() {
+  const { data } = await sb.from('pendaftaran_membership').select('*, member(nama_depan,nama_belakang), paket_membership(nama_paket)').order('created_at',{ascending:false});
+  document.getElementById('tbl-pendaftaran').innerHTML = (data||[]).map(p => `<tr>
+    <td style="color:var(--white)">${p.member?.nama_depan||''} ${p.member?.nama_belakang||''}</td>
+    <td>${p.paket_membership?.nama_paket||'-'}</td>
+    <td>${fmtDate(p.tanggal_mulai)}</td>
+    <td>${fmtDate(p.tanggal_selesai)}</td>
+    <td style="color:var(--gold)">${fmt(p.total_bayar)}</td>
+    <td>${badgeHTML(p.status_bayar)}</td>
+    <td>
+      ${p.status_bayar==='pending'?`<button class="btn-sm btn-crimson" onclick="konfirmasiBayar(${p.id_pendaftaran})">Konfirmasi Lunas</button>`:''}
+    </td>
+  </tr>`).join('') || '<tr><td colspan="7" style="color:var(--dim)">Belum ada pendaftaran</td></tr>';
+}
+
+async function konfirmasiBayar(id) {
+  if (!confirm('Konfirmasi pembayaran ini sudah LUNAS?')) return;
+  await sb.from('pendaftaran_membership').update({status_bayar:'lunas'}).eq('id_pendaftaran',id);
+  loadPendaftaran();
+}
+
+// ============ MODAL ============
+function openModal(type, data = null) {
+  currentModal = type;
+  editId = null;
+  const title = document.getElementById('modal-title');
+  const body = document.getElementById('modal-body');
+
+  if (type === 'paket') {
+    editId = data?.id_paket || null;
+    title.textContent = data ? 'EDIT PAKET' : 'TAMBAH PAKET';
+    body.innerHTML = `
+      <div class="form-group"><label>Nama Paket</label><input id="m-nama" value="${data?.nama_paket||''}" /></div>
+      <div class="form-group"><label>Durasi (hari)</label><input type="number" id="m-durasi" value="${data?.durasi_hari||30}" /></div>
+      <div class="form-group"><label>Harga (Rp)</label><input type="number" id="m-harga" value="${data?.harga||0}" /></div>
+      <div class="form-group"><label>Deskripsi</label><textarea id="m-desk">${data?.deskripsi||''}</textarea></div>
+      <div class="form-group"><label>Fitur (pisahkan dengan enter)</label><textarea id="m-fitur" rows="5">${(data?.fitur||[]).join('\n')}</textarea></div>
+      <div class="form-group"><label>Aktif</label><select id="m-aktif"><option value="true" ${data?.is_aktif!==false?'selected':''}>Ya</option><option value="false" ${data?.is_aktif===false?'selected':''}>Tidak</option></select></div>`;
+  }
+  else if (type === 'trainer') {
+    editId = data?.id_trainer || null;
+    currentTrainerFotoUrl = data?.foto_url || null;
+    title.textContent = data ? 'EDIT TRAINER' : 'TAMBAH TRAINER';
+    const previewImg = data?.foto_url
+      ? `<img src="${data.foto_url}" style="width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid rgba(255,255,255,0.1);" />`
+      : `<div style="width:80px;height:80px;background:var(--bg3);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:2rem;border-radius:4px;">${data?.emoji||'🏋️'}</div>`;
+    body.innerHTML = `
+      <div class="form-group"><label>Foto Trainer</label>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
+          <div id="foto-preview">${previewImg}</div>
+          <div style="flex:1;">
+            <input type="file" id="m-foto" accept="image/*" onchange="previewFoto(this)" style="font-size:0.85rem;" />
+            <p style="font-size:0.7rem;color:var(--dim);margin-top:6px;">JPG/PNG, maks 2MB. Kosongkan jika pakai emoji.</p>
+            ${data?.foto_url ? `<button class="btn-sm btn-danger" style="margin-top:6px;" onclick="removeFotoPreview()">Hapus Foto</button>` : ''}
+          </div>
+        </div>
+      </div>
+      <div class="form-group"><label>Nama</label><input id="m-nama" value="${data?.nama||''}" /></div>
+      <div class="form-group"><label>Jenis Kelamin</label><select id="m-jk"><option value="L" ${data?.jenis_kelamin==='L'?'selected':''}>Laki-laki</option><option value="P" ${data?.jenis_kelamin==='P'?'selected':''}>Perempuan</option></select></div>
+      <div class="form-group"><label>Spesialisasi</label><input id="m-spec" value="${data?.spesialisasi||''}" /></div>
+      <div class="form-group"><label>Sertifikasi</label><input id="m-sert" value="${data?.sertifikasi||''}" /></div>
+      <div class="form-group"><label>Biografi</label><textarea id="m-bio">${data?.biografi||''}</textarea></div>
+      <div class="form-group"><label>Harga per Sesi (Rp)</label><input type="number" id="m-harga" value="${data?.harga_per_sesi||0}" /></div>
+      <div class="form-group"><label>Emoji (fallback jika tanpa foto)</label><input id="m-emoji" value="${data?.emoji||'🏋️'}" /></div>
+      <div class="form-group"><label>Tersedia</label><select id="m-aktif"><option value="true" ${data?.is_tersedia!==false?'selected':''}>Ya</option><option value="false" ${data?.is_tersedia===false?'selected':''}>Tidak</option></select></div>`;
+  }
+  else if (type === 'kelas') {
+    editId = data?.id_kelas || null;
+    title.textContent = data ? 'EDIT KELAS' : 'TAMBAH KELAS';
+    const trainerOpts = trainerCache.map(t => `<option value="${t.id_trainer}" ${data?.id_trainer===t.id_trainer?'selected':''}>${t.nama}</option>`).join('');
+    body.innerHTML = `
+      <div class="form-group"><label>Nama Kelas</label><input id="m-nama" value="${data?.nama_kelas||''}" /></div>
+      <div class="form-group"><label>Trainer</label><select id="m-trainer"><option value="">Pilih...</option>${trainerOpts}</select></div>
+      <div class="form-group"><label>Hari</label><select id="m-hari">${['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'].map(h=>`<option ${data?.hari===h?'selected':''}>${h}</option>`).join('')}</select></div>
+      <div class="form-group"><label>Jam Mulai</label><input type="time" id="m-jam" value="${data?.jam_mulai?.substring(0,5)||'09:00'}" /></div>
+      <div class="form-group"><label>Durasi (menit)</label><input type="number" id="m-durasi" value="${data?.durasi_menit||60}" /></div>
+      <div class="form-group"><label>Lokasi</label><input id="m-lokasi" value="${data?.lokasi||''}" /></div>`;
+  }
+  else if (type === 'jam') {
+    editId = data?.id || null;
+    title.textContent = data ? 'EDIT JAM' : 'TAMBAH JAM OPERASIONAL';
+    body.innerHTML = `
+      <div class="form-group"><label>Tipe Hari</label><input id="m-tipe" value="${data?.tipe_hari||''}" placeholder="Hari Kerja (Senin-Jumat)" /></div>
+      <div class="form-group"><label>Jam Buka</label><input type="time" id="m-buka" value="${data?.jam_buka?.substring(0,5)||'09:00'}" /></div>
+      <div class="form-group"><label>Jam Tutup</label><input type="time" id="m-tutup" value="${data?.jam_tutup?.substring(0,5)||'23:00'}" /></div>
+      <div class="form-group"><label>Keterangan</label><input id="m-ket" value="${data?.keterangan||''}" /></div>`;
+  }
+
+  document.getElementById('modal-overlay').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('show');
+  currentModal = null; editId = null;
+}
+
+async function saveModal() {
+  const btn = document.getElementById('modal-save');
+  btn.disabled = true; btn.textContent = 'MENYIMPAN...';
+
+  try {
+    if (currentModal === 'paket') {
+      const obj = {
+        nama_paket: document.getElementById('m-nama').value.trim(),
+        durasi_hari: parseInt(document.getElementById('m-durasi').value),
+        harga: parseFloat(document.getElementById('m-harga').value),
+        deskripsi: document.getElementById('m-desk').value.trim(),
+        fitur: document.getElementById('m-fitur').value.split('\n').map(f=>f.trim()).filter(Boolean),
+        is_aktif: document.getElementById('m-aktif').value === 'true'
+      };
+      if (editId) await sb.from('paket_membership').update(obj).eq('id_paket', editId);
+      else await sb.from('paket_membership').insert([obj]);
+      loadPaket();
     }
+    else if (currentModal === 'trainer') {
+      const obj = {
+        nama: document.getElementById('m-nama').value.trim(),
+        jenis_kelamin: document.getElementById('m-jk').value,
+        spesialisasi: document.getElementById('m-spec').value.trim(),
+        sertifikasi: document.getElementById('m-sert').value.trim() || null,
+        biografi: document.getElementById('m-bio').value.trim(),
+        harga_per_sesi: parseFloat(document.getElementById('m-harga').value),
+        emoji: document.getElementById('m-emoji').value.trim() || '🏋️',
+        is_tersedia: document.getElementById('m-aktif').value === 'true'
+      };
 
-    // Toast helper
-    function showToast(msg, type = 'success') {
-      const tc = document.getElementById('toast-container');
-      const t = document.createElement('div');
-      t.className = `toast ${type}`;
-      const icons = { success: '✅', error: '❌', warning: '⚠️' };
-      t.innerHTML = `<span>${icons[type] || '💬'}</span> ${msg}`;
-      tc.appendChild(t);
-      setTimeout(() => {
-        t.classList.add('hiding');
-        setTimeout(() => t.remove(), 220);
-      }, 3000);
-    }
+      // Handle foto upload
+      const fotoInput = document.getElementById('m-foto');
+      const fotoFile = fotoInput?.files?.[0];
 
-    // Modal
-    let pendingDeleteId = null;
-    function openModalHapus(id, nama) {
-      pendingDeleteId = id;
-      document.getElementById('modal-hapus-nama').textContent = nama;
-      document.getElementById('modal-hapus').classList.add('open');
-    }
-    function tutupModal() {
-      document.getElementById('modal-hapus').classList.remove('open');
-      pendingDeleteId = null;
-    }
-    function konfirmasiHapus() {
-      if (pendingDeleteId !== null) hapusProduk(pendingDeleteId);
-      tutupModal();
-    }
-    function resetForm() {
-      ['nama','harga','deskripsi','gambar_url'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('kategori').value = '';
-    }
+      if (editId) {
+        // Update trainer data first
+        await sb.from('personal_trainer').update(obj).eq('id_trainer', editId);
 
-    window.__showToast = showToast;
-    window.__openModalHapus = openModalHapus;
-  </script>
+        // Upload new photo if selected
+        if (fotoFile) {
+          btn.textContent = 'MENGUPLOAD FOTO...';
+          // Delete old photo if exists
+          if (currentTrainerFotoUrl) {
+            const oldPath = currentTrainerFotoUrl.split('/trainer-photos/')[1];
+            if (oldPath) await sb.storage.from('trainer-photos').remove([oldPath]);
+          }
+          const ext = fotoFile.name.split('.').pop().toLowerCase();
+          const fileName = `trainer-${editId}-${Date.now()}.${ext}`;
+          const { error: upErr } = await sb.storage.from('trainer-photos').upload(fileName, fotoFile, { cacheControl:'3600', upsert:false });
+          if (!upErr) {
+            const { data: urlData } = sb.storage.from('trainer-photos').getPublicUrl(fileName);
+            if (urlData?.publicUrl) await sb.from('personal_trainer').update({ foto_url: urlData.publicUrl }).eq('id_trainer', editId);
+          }
+        }
+        // Remove photo if flag set
+        else if (removeFotoFlag && currentTrainerFotoUrl) {
+          const oldPath = currentTrainerFotoUrl.split('/trainer-photos/')[1];
+          if (oldPath) await sb.storage.from('trainer-photos').remove([oldPath]);
+          await sb.from('personal_trainer').update({ foto_url: null }).eq('id_trainer', editId);
+        }
+      } else {
+        // Insert new trainer
+        const { data: newTrainer } = await sb.from('personal_trainer').insert([obj]).select();
+        // Upload photo for new trainer
+        if (fotoFile && newTrainer?.[0]) {
+          btn.textContent = 'MENGUPLOAD FOTO...';
+          const tid = newTrainer[0].id_trainer;
+          const ext = fotoFile.name.split('.').pop().toLowerCase();
+          const fileName = `trainer-${tid}-${Date.now()}.${ext}`;
+          const { error: upErr } = await sb.storage.from('trainer-photos').upload(fileName, fotoFile, { cacheControl:'3600', upsert:false });
+          if (!upErr) {
+            const { data: urlData } = sb.storage.from('trainer-photos').getPublicUrl(fileName);
+            if (urlData?.publicUrl) await sb.from('personal_trainer').update({ foto_url: urlData.publicUrl }).eq('id_trainer', tid);
+          }
+        }
+      }
+      removeFotoFlag = false;
+      currentTrainerFotoUrl = null;
+      loadTrainers();
+    }
+    else if (currentModal === 'kelas') {
+      const obj = {
+        nama_kelas: document.getElementById('m-nama').value.trim(),
+        id_trainer: parseInt(document.getElementById('m-trainer').value) || null,
+        hari: document.getElementById('m-hari').value,
+        jam_mulai: document.getElementById('m-jam').value,
+        durasi_menit: parseInt(document.getElementById('m-durasi').value),
+        lokasi: document.getElementById('m-lokasi').value.trim()
+      };
+      if (editId) await sb.from('kelas_grup').update(obj).eq('id_kelas', editId);
+      else await sb.from('kelas_grup').insert([obj]);
+      loadKelas();
+    }
+    else if (currentModal === 'jam') {
+      const obj = {
+        tipe_hari: document.getElementById('m-tipe').value.trim(),
+        jam_buka: document.getElementById('m-buka').value,
+        jam_tutup: document.getElementById('m-tutup').value,
+        keterangan: document.getElementById('m-ket').value.trim()
+      };
+      if (editId) await sb.from('jam_operasional').update(obj).eq('id', editId);
+      else await sb.from('jam_operasional').insert([obj]);
+      loadJam();
+    }
+    closeModal();
+  } catch(e) {
+    alert('Error: ' + e.message);
+  }
+  btn.disabled = false; btn.textContent = 'SIMPAN';
+}
+
+// ============ INIT ============
+checkSession();
+</script>
 </body>
 </html>
