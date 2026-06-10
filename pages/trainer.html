@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Trainer — Barokah GYM</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* ===== TRAINER PHOTO STYLES ===== */
+    .trainer-avatar {
+      width: 100%;
+      height: 260px;
+      overflow: hidden;
+      position: relative;
+      background: linear-gradient(160deg, #1a0005, #111);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .trainer-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .trainer-card:hover .trainer-avatar img {
+      transform: scale(1.05);
+    }
+    /* Fallback emoji jika foto tidak ada */
+    .trainer-avatar .trainer-emoji {
+      font-size: 5rem;
+      position: relative;
+      z-index: 1;
+    }
+    /* Badge overlay di atas foto */
+    .trainer-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="../index.html" class="nav-logo">BAROKAH <span>GYM</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">Tentang Kami</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="trainer.html" class="active">Personal Trainer</a></li>
+    <li><a href="schedule.html">Jadwal</a></li>
+    <li><a href="register.html" class="nav-cta">Daftar Sekarang</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">Tentang Kami</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="trainer.html">Personal Trainer</a></li>
+    <li><a href="schedule.html">Jadwal</a></li>
+    <li><a href="register.html">Daftar Sekarang</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-pattern"></div>
+  <div class="page-hero-content">
+    <p class="section-eyebrow" style="margin-bottom:16px;">Tim Profesional</p>
+    <h1 class="page-hero-title">PERSONAL <span class="red">TRAINER</span></h1>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="section">
+  <p class="section-desc fade-in">
+    Dipandu oleh trainer bersertifikat dengan pengalaman bertahun-tahun, program latihanmu akan dirancang khusus sesuai tujuan dan kemampuanmu.
+  </p>
+
+  <div class="trainers-grid" style="margin-top:60px;">
+
+    <!-- ============================================================
+         CARA MENGGANTI FOTO TRAINER:
+         1. Simpan foto ke folder: images/trainers/
+         2. Ganti src="..." dengan nama file foto kamu
+            Contoh: src="../images/trainers/rizky.jpg"
+         3. Jika foto belum ada, tampil emoji otomatis
+    ============================================================ -->
+
+    <!-- TRAINER 1 -->
+    <div class="trainer-card fade-in">
+      <div class="trainer-avatar" style="background: linear-gradient(160deg, #1a0005, #111);">
+        <img
+          src="../images/trainers/fatah.jpg"
+          alt="ABDUL FATAH AZHAR"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <span class="trainer-emoji" style="display:none;">🧑‍💪</span>
+      </div>
+      <div class="trainer-body">
+        <div class="trainer-name">ABDUL FATAH AZHAR</div>
+        <div class="trainer-spec">Strength & Powerlifting</div>
+        <p class="trainer-bio">Spesialis latihan kekuatan dengan pengalaman 7 tahun. Bersertifikat ISSA CPT, telah melatih lebih dari 80 member menuju target strength mereka.</p>
+        <div class="trainer-price">Rp 150.000 <span>/ sesi (60 mnt)</span></div>
+        <a href="#" onclick="bookPT('ABDUL FATAH AZHAR','Strength & Powerlifting'); return false;" class="btn-primary" style="display:block;text-align:center;margin-top:16px;">Booking Sesi</a>
+      </div>
+    </div>
+
+    <!-- TRAINER 2 -->
+    <div class="trainer-card fade-in">
+      <div class="trainer-avatar" style="background: linear-gradient(160deg, #001a0a, #111);">
+        <img
+          src="../images/trainers/akmal.jpg"
+          alt="Akmal Haydar Annur"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <span class="trainer-emoji" style="display:none;">👨‍💪</span>
+      </div>
+      <div class="trainer-body">
+        <div class="trainer-name">Akmal Haydar Annur</div>
+        <div class="trainer-spec">Bodybuilding & Hypertrophy</div>
+        <p class="trainer-bio">Spesialis program pembentukan otot dan estetika tubuh. Atlet bodybuilding regional dengan pengalaman coaching 5 tahun.</p>
+        <div class="trainer-price">Rp 150.000 <span>/ sesi (60 mnt)</span></div>
+        <a href="#" onclick="bookPT('Akmal Haydar Annur','Bodybuilding & Hypertrophy'); return false;" class="btn-primary" style="display:block;text-align:center;margin-top:16px;">Booking Sesi</a>
+      </div>
+    </div>
+
+    <!-- TRAINER 3 -->
+    <div class="trainer-card fade-in">
+      <div class="trainer-avatar" style="background: linear-gradient(160deg, #0a0a1a, #111);">
+        <img
+          src="../images/trainers/raihan.jpg"
+          alt="MOH. RAIHAN DANAPATI NAJA"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <span class="trainer-emoji" style="display:none;">🏃‍♂️</span>
+      </div>
+      <div class="trainer-body">
+        <div class="trainer-name">MOH. RAIHAN DANAPATI NAJA</div>
+        <div class="trainer-spec">Cardio & Fat Loss</div>
+        <p class="trainer-bio">Ahli program penurunan berat badan dan peningkatan stamina kardiovaskular. Bersertifikat ACE dengan track record klien penurunan 10–30 kg.</p>
+        <div class="trainer-price">Rp 130.000 <span>/ sesi (60 mnt)</span></div>
+        <a href="#" onclick="bookPT('MOH. RAIHAN DANAPATI NAJA','Cardio & Fat Loss'); return false;" class="btn-primary" style="display:block;text-align:center;margin-top:16px;">Booking Sesi</a>
+      </div>
+    </div>
+
+    <!-- TRAINER 4 -->
+    <div class="trainer-card fade-in">
+      <div class="trainer-avatar" style="background: linear-gradient(160deg, #1a1000, #111);">
+        <img
+          src="../images/trainers/prabu.jpg"
+          alt="PRABU SABDO WIBOWO"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <span class="trainer-emoji" style="display:none;">🥊</span>
+      </div>
+      <div class="trainer-body">
+        <div class="trainer-name">BAGAS WICAKSONO</div>
+        <div class="trainer-spec">Functional & HIIT</div>
+        <p class="trainer-bio">Spesialis latihan fungsional dan HIIT (High-Intensity Interval Training). Mantan atlet pencak silat nasional, kini fokus melatih kebugaran total.</p>
+        <div class="trainer-price">Rp 130.000 <span>/ sesi (60 mnt)</span></div>
+        <a href="#" onclick="bookPT('PRABU SABDO WIBOWO','Functional & HIIT'); return false;" class="btn-primary" style="display:block;text-align:center;margin-top:16px;">Booking Sesi</a>
+      </div>
+    </div>
+
+    <!-- TRAINER 5 -->
+    <div class="trainer-card fade-in">
+      <div class="trainer-avatar" style="background: linear-gradient(160deg, #1a0010, #111);">
+        <img
+          src="../images/trainers/siti.jpg"
+          alt="Siti Rahayu"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <span class="trainer-emoji" style="display:none;">🧘‍♀️</span>
+      </div>
+      <div class="trainer-body">
+        <div class="trainer-name">SITI RAHAYU</div>
+        <div class="trainer-spec">Yoga & Flexibility</div>
+        <p class="trainer-bio">Instruktur yoga bersertifikat RYT-200 dengan spesialisasi fleksibilitas, keseimbangan, dan pemulihan cedera. Pengalaman 6 tahun membimbing semua level.</p>
+        <div class="trainer-price">Rp 120.000 <span>/ sesi (60 mnt)</span></div>
+        <a href="#" onclick="bookPT('Siti Rahayu','Yoga & Flexibility'); return false;" class="btn-primary" style="display:block;text-align:center;margin-top:16px;">Booking Sesi</a>
+      </div>
+    </div>
+
+    <!-- TRAINER 6 -->
+    <div class="trainer-card fade-in">
+      <div class="trainer-avatar" style="background: linear-gradient(160deg, #001510, #111);">
+        <img
+          src="../images/trainers/indah.jpg"
+          alt="Indah Permata"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <span class="trainer-emoji" style="display:none;">💃</span>
+      </div>
+      <div class="trainer-body">
+        <div class="trainer-name">INDAH PERMATA</div>
+        <div class="trainer-spec">Aerobik & Dance Fitness</div>
+        <p class="trainer-bio">Pelatih aerobik dan dance fitness yang energik. Bersertifikat Zumba Instructor dengan kemampuan membakar kalori sambil bersenang-senang.</p>
+        <div class="trainer-price">Rp 120.000 <span>/ sesi (60 mnt)</span></div>
+        <a href="#" onclick="bookPT('Indah Permata','Aerobik & Dance Fitness'); return false;" class="btn-primary" style="display:block;text-align:center;margin-top:16px;">Booking Sesi</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<div class="section">
+  <div class="fade-in">
+    <p class="section-eyebrow">Cara Kerja</p>
+    <h2 class="section-title">CARA BOOKING <span class="red">SESI</span></h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px;">
+    <div class="fade-in" style="background:var(--black-2);padding:40px 32px;border:1px solid rgba(255,255,255,0.04);text-align:center;">
+      <div style="font-size:3rem;margin-bottom:20px;">01</div>
+      <h3 style="font-family:'Bebas Neue',cursive;letter-spacing:3px;font-size:1.4rem;margin-bottom:12px;color:var(--crimson);">PILIH TRAINER</h3>
+      <p style="font-family:'Cormorant Garamond',serif;color:var(--white-dim);line-height:1.8;">Lihat profil dan spesialisasi masing-masing trainer, lalu pilih yang paling sesuai dengan tujuanmu.</p>
+    </div>
+    <div class="fade-in" style="background:var(--black-2);padding:40px 32px;border:1px solid rgba(255,255,255,0.04);text-align:center;">
+      <div style="font-size:3rem;margin-bottom:20px;">02</div>
+      <h3 style="font-family:'Bebas Neue',cursive;letter-spacing:3px;font-size:1.4rem;margin-bottom:12px;color:var(--crimson);">HUBUNGI ADMIN</h3>
+      <p style="font-family:'Cormorant Garamond',serif;color:var(--white-dim);line-height:1.8;">Klik tombol "Booking Sesi" dan kamu akan otomatis diarahkan ke WhatsApp admin untuk konfirmasi jadwal.</p>
+    </div>
+    <div class="fade-in" style="background:var(--black-2);padding:40px 32px;border:1px solid rgba(255,255,255,0.04);text-align:center;">
+      <div style="font-size:3rem;margin-bottom:20px;">03</div>
+      <h3 style="font-family:'Bebas Neue',cursive;letter-spacing:3px;font-size:1.4rem;margin-bottom:12px;color:var(--crimson);">MULAI LATIHAN</h3>
+      <p style="font-family:'Cormorant Garamond',serif;color:var(--white-dim);line-height:1.8;">Datang ke gym di jadwal yang telah disepakati dan mulai perjalanan transformasimu bersama trainer pilihan.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">BAROKAH <span>GYM</span></div>
+      <p class="footer-desc">Premium fitness center yang berdedikasi membantu Anda mencapai tujuan kesehatan dan kebugaran terbaik.</p>
+      <p style="font-size:0.8rem; color:var(--gray); letter-spacing:2px;">Jl. Pegasaan Timur, Jakarta</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">Tentang Kami</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="trainer.html">Personal Trainer</a></li>
+        <li><a href="schedule.html">Jadwal & Jam Buka</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Trainer</h4>
+      <ul>
+        <li><a href="#">Rizky Pratama</a></li>
+        <li><a href="#">Daffa Nugraha</a></li>
+        <li><a href="#">Alif Rahman</a></li>
+        <li><a href="#">Siti Rahayu</a></li>
+        <li><a href="#">Indah Permata</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <p>Jl. Pegasaan Timur<br>Jakarta, Indonesia</p><br>
+      <p>📞 0895360433929</p><br>
+      <p>Senin – Jumat: 09.00 – 23.00<br>Weekend/Libur: 09.00 – 15.00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BAROKAH GYM. ALL RIGHTS RESERVED.</p>
+    <p>PREMIUM FITNESS CENTER · JAKARTA · <a href="../admin/" style="color:#666;text-decoration:none;font-size:0.7rem;letter-spacing:2px;">ADMIN</a></p>
+  </div>
+</footer>
+
+<a href="https://wa.me/62895360433929" class="wa-float" target="_blank">💬</a>
+
+<script src="../js/main.js"></script>
+<script>
+function bookPT(nama, spesialisasi) {
+  const msg = `Halo Admin Barokah GYM! 👋\n\nSaya ingin melakukan booking sesi personal training:\n\n👤 *Trainer:* ${nama}\n🏋️ *Spesialisasi:* ${spesialisasi}\n\nMohon info ketersediaan jadwal dan konfirmasi pembayaran. Terima kasih!`;
+  const url = `https://wa.me/62895360433929?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script>
+const gradients = [
+  'linear-gradient(160deg, #1a0005, #111)',
+  'linear-gradient(160deg, #001a0a, #111)',
+  'linear-gradient(160deg, #0a0a1a, #111)',
+  'linear-gradient(160deg, #1a1000, #111)',
+  'linear-gradient(160deg, #1a0010, #111)',
+  'linear-gradient(160deg, #001510, #111)'
+];
+(async () => {
+  await initSupabase();
+  const trainers = await getTrainers();
+  if (!trainers || !trainers.length) return;
+  const grid = document.getElementById('trainers-grid');
+  if (!grid) return;
+  grid.innerHTML = trainers.map((t, i) => {
+    const hasPhoto = t.foto_url;
+    const avatarContent = hasPhoto
+      ? `<img src="${t.foto_url}" alt="${t.nama}" />`
+      : `<span class="emoji-fallback">${t.emoji || '🏋️'}</span>`;
+    return `<div class="trainer-card fade-in visible">
+      <div class="trainer-avatar" style="background:${gradients[i % gradients.length]}">
+        ${avatarContent}
+      </div>
+      <div class="trainer-body">
+        <div class="trainer-name">${t.nama.toUpperCase()}</div>
+        <div class="trainer-spec">${t.spesialisasi}</div>
+        <p class="trainer-bio">${t.biografi || ''}${t.sertifikasi ? ' Bersertifikat ' + t.sertifikasi + '.' : ''}</p>
+        <div class="trainer-price">${formatRupiah(t.harga_per_sesi)} <span>/ sesi (60 mnt)</span></div>
+        <br>
+        <a href="#" onclick="bookPT('${t.nama}','${t.spesialisasi}')" class="btn-primary" style="display:block;text-align:center;">Booking Sesi</a>
+      </div>
+    </div>`;
+  }).join('');
+})();
+
+function bookPT(nama, spec) {
+  const msg = `Halo Admin Barokah GYM! 👋\n\nSaya ingin booking sesi personal training:\n\n👤 *Trainer:* ${nama}\n🏋️ *Spesialisasi:* ${spec}\n\nMohon info ketersediaan jadwal. Terima kasih!`;
+  window.open(`https://wa.me/62895360433929?text=${encodeURIComponent(msg)}`, '_blank');
+}
+</script>
+</body>
+</html>

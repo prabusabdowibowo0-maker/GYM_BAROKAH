@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barokah GYM — Premium Fitness Center Jakarta</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* HOME-SPECIFIC */
+    .hero-decoration {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .deco-ring {
+      width: 420px;
+      height: 420px;
+      border: 1px solid rgba(192,0,29,0.15);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: spin-slow 25s linear infinite;
+    }
+
+    .deco-ring-2 {
+      width: 300px;
+      height: 300px;
+      border: 1px solid rgba(192,0,29,0.25);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: spin-slow 15s linear infinite reverse;
+    }
+
+    .deco-center {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 8rem;
+      color: rgba(192,0,29,0.12);
+      line-height: 1;
+      width: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes spin-slow {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-decoration { display: none; }
+    }
+
+    /* ABOUT TEASER */
+    .about-teaser {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+      height: 500px;
+    }
+
+    .about-visual-box {
+      position: absolute;
+      background: var(--black-3);
+      border: 1px solid rgba(192,0,29,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .about-visual-box.main {
+      width: 75%;
+      height: 75%;
+      top: 0; left: 0;
+    }
+
+    .about-visual-box.accent {
+      width: 55%;
+      height: 55%;
+      bottom: 0; right: 0;
+      border-color: var(--crimson);
+      font-family: 'Bebas Neue', cursive;
+      font-size: 5rem;
+      color: var(--crimson);
+      letter-spacing: 2px;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .about-visual-box.accent small {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 5px;
+      color: var(--white-dim);
+    }
+
+    .about-text-list {
+      list-style: none;
+      margin-top: 30px;
+    }
+
+    .about-text-list li {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--white-dim);
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .about-text-list li::before {
+      content: '▸';
+      color: var(--crimson);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .about-teaser { grid-template-columns: 1fr; }
+      .about-visual { height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="index.html" class="nav-logo">BAROKAH <span>GYM</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="pages/about.html">Tentang Kami</a></li>
+    <li><a href="pages/membership.html">Membership</a></li>
+    <li><a href="pages/trainer.html">Personal Trainer</a></li>
+    <li><a href="pages/schedule.html">Jadwal</a></li>
+    <li><a href="pages/register.html" class="nav-cta">Daftar Sekarang</a></li>
+  </ul>
+  <div class="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="pages/about.html">Tentang Kami</a></li>
+    <li><a href="pages/membership.html">Membership</a></li>
+    <li><a href="pages/trainer.html">Personal Trainer</a></li>
+    <li><a href="pages/schedule.html">Jadwal</a></li>
+    <li><a href="pages/register.html">Daftar Sekarang</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-decoration">
+    <div style="position:relative; width:420px; height:420px;">
+      <div class="deco-ring"></div>
+      <div class="deco-ring-2"></div>
+      <div class="deco-center" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
+        💪
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Premium Fitness Center · Jakarta</p>
+    <h1 class="hero-title">
+      <span>FORGE</span>
+      <span class="accent">YOUR</span>
+      <span class="outline">LIMITS</span>
+    </h1>
+    <p class="hero-subtitle">
+      Gym premium dengan fasilitas kelas dunia, pelatih bersertifikat, dan suasana yang membakar semangat juangmu setiap hari.
+    </p>
+    <div class="hero-actions">
+      <a href="pages/register.html" class="btn-primary">Bergabung Sekarang</a>
+      <a href="pages/about.html" class="btn-secondary">Pelajari Lebih</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number" data-target="500" data-suffix="+">0</div>
+    <div class="stat-label">Member Aktif</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" data-target="6">0</div>
+    <div class="stat-label">Personal Trainer</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" data-target="4">0</div>
+    <div class="stat-label">Fasilitas Premium</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" data-target="14" data-suffix=" Jam">0</div>
+    <div class="stat-label">Jam Operasional</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT TEASER -->
+<div class="section">
+  <div class="about-teaser">
+    <div class="about-visual fade-in">
+      <div class="about-visual-box main">🏋️</div>
+      <div class="about-visual-box accent">
+        2019
+        <small>BERDIRI SEJAK</small>
+      </div>
+    </div>
+    <div class="fade-in">
+      <p class="section-eyebrow">Tentang Kami</p>
+      <h2 class="section-title">LEBIH DARI<br>SEKEDAR <span class="red">GYM</span></h2>
+      <p class="section-desc">
+        Barokah GYM hadir dengan visi menciptakan ruang transformasi — bukan sekadar tempat berlatih, melainkan komunitas yang menginspirasi setiap anggotanya mencapai versi terbaik diri mereka.
+      </p>
+      <ul class="about-text-list">
+        <li>Peralatan fitness berkualitas tinggi dan terawat</li>
+        <li>Ruang bersih, luas, dan berventilasi baik</li>
+        <li>Personal Trainer bersertifikat nasional</li>
+        <li>Komunitas yang suportif dan memotivasi</li>
+      </ul>
+      <br>
+      <a href="pages/about.html" class="btn-secondary">Selengkapnya →</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FACILITIES TEASER -->
+<div class="section">
+  <div class="fade-in">
+    <p class="section-eyebrow">Fasilitas</p>
+    <h2 class="section-title">FASILITAS <span class="red">PREMIUM</span></h2>
+    <p class="section-desc">Setiap sudut dirancang untuk mendukung perjalanan fitness-mu secara maksimal.</p>
+  </div>
+  <div class="facilities-grid" style="margin-top:50px;">
+    <div class="facility-card fade-in">
+      <span class="facility-icon">🏋️</span>
+      <div class="facility-name">Area Gym</div>
+      <p class="facility-desc">Peralatan lengkap untuk strength training, cardio, dan functional movement. Lebih dari 50 jenis alat tersedia.</p>
+    </div>
+    <div class="facility-card fade-in">
+      <span class="facility-icon">🔒</span>
+      <div class="facility-name">Loket Pribadi</div>
+      <p class="facility-desc">Loker aman dengan kunci personal tersedia untuk setiap member aktif selama sesi latihan berlangsung.</p>
+    </div>
+    <div class="facility-card fade-in">
+      <span class="facility-icon">🚿</span>
+      <div class="facility-name">Kamar Mandi</div>
+      <p class="facility-desc">Fasilitas mandi dan ganti yang bersih, modern, dengan amenities lengkap setelah sesi latihan intensif.</p>
+    </div>
+    <div class="facility-card fade-in">
+      <span class="facility-icon">🤸</span>
+      <div class="facility-name">Area Senam</div>
+      <p class="facility-desc">Studio senam luas dengan lantai khusus dan cermin penuh untuk kelas aerobik, yoga, dan pilates.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CTA SECTION -->
+<div class="section-full" style="background: linear-gradient(135deg, #0F0000 0%, var(--black-2) 100%); padding: 100px 60px; text-align:center;">
+  <p class="section-eyebrow" style="justify-content:center; margin-bottom:20px;">Mulai Perjalananmu</p>
+  <h2 class="section-title fade-in" style="font-size: clamp(3rem, 7vw, 7rem); margin-bottom:20px;">
+    SIAP <span class="red">BERUBAH?</span>
+  </h2>
+  <p class="section-desc fade-in" style="margin: 0 auto 48px; text-align:center;">
+    Daftar sekarang dan dapatkan konsultasi program latihan gratis bersama personal trainer kami.
+  </p>
+  <div class="fade-in" style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+    <a href="pages/membership.html" class="btn-primary">Pilih Paket Membership</a>
+    <a href="pages/trainer.html" class="btn-secondary">Lihat Personal Trainer</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">BAROKAH <span>GYM</span></div>
+      <p class="footer-desc">
+        Premium fitness center yang berdedikasi membantu Anda mencapai tujuan kesehatan dan kebugaran dengan standar fasilitas dan layanan terbaik.
+      </p>
+      <p style="font-size:0.8rem; color:var(--gray); letter-spacing:2px;">Jl. Pegasaan Timur, Jakarta</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="pages/about.html">Tentang Kami</a></li>
+        <li><a href="pages/membership.html">Membership</a></li>
+        <li><a href="pages/trainer.html">Personal Trainer</a></li>
+        <li><a href="pages/schedule.html">Jadwal & Jam Buka</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Layanan</h4>
+      <ul>
+        <li><a href="pages/membership.html">Paket Bulanan</a></li>
+        <li><a href="pages/membership.html">Paket 3 Bulan</a></li>
+        <li><a href="pages/membership.html">Paket Tahunan</a></li>
+        <li><a href="pages/trainer.html">Sesi Personal Training</a></li>
+        <li><a href="pages/register.html">Pendaftaran Member</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <p>Jl. Pegasaan Timur<br>Jakarta, Indonesia</p>
+      <br>
+      <p>📞 0895360433929</p>
+      <br>
+      <p>Senin – Jumat<br>09.00 – 23.00 WIB</p>
+      <p>Sabtu – Minggu / Libur<br>09.00 – 15.00 WIB</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BAROKAH GYM. ALL RIGHTS RESERVED.</p>
+    <p>PREMIUM FITNESS CENTER · JAKARTA · <a href="admin/" style="color:#666;text-decoration:none;font-size:0.7rem;letter-spacing:2px;">ADMIN</a></p>
+  </div>
+</footer>
+
+<a href="https://wa.me/62895360433929" class="wa-float" target="_blank" title="Hubungi via WhatsApp">💬</a>
+
+<script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script>
+(async () => {
+  await initSupabase();
+  const stats = await getStats();
+  if (!stats) return;
+  const statEls = document.querySelectorAll('.stat-number');
+  statEls.forEach(el => {
+    const label = el.nextElementSibling?.textContent || '';
+    if (label.includes('Member') && stats.memberAktif > 0) el.dataset.target = stats.memberAktif;
+    if (label.includes('Trainer') && stats.jumlahTrainer > 0) el.dataset.target = stats.jumlahTrainer;
+  });
+})();
+</script>
+</body>
+</html>

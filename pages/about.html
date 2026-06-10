@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tentang Kami — Barokah GYM</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 50px;
+    }
+    .value-card {
+      background: var(--black-2);
+      padding: 50px 36px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.3s ease;
+    }
+    .value-card:hover {
+      border-color: rgba(192,0,29,0.3);
+      background: var(--black-3);
+    }
+    .value-num {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 5rem;
+      color: rgba(192,0,29,0.1);
+      line-height: 1;
+      position: absolute;
+      top: 20px; right: 20px;
+    }
+    .value-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      margin-bottom: 14px;
+    }
+    .value-desc {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--white-dim);
+      line-height: 1.8;
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 60px;
+      padding-left: 40px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--crimson), transparent);
+    }
+    .timeline-item {
+      position: relative;
+      padding: 0 0 50px 40px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -5px; top: 6px;
+      width: 10px; height: 10px;
+      background: var(--crimson);
+      transform: rotate(45deg);
+    }
+    .timeline-year {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2.5rem;
+      letter-spacing: 3px;
+      color: var(--crimson);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .timeline-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+    .timeline-desc {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--white-dim);
+      line-height: 1.8;
+    }
+
+    @media(max-width:768px){
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="../index.html" class="nav-logo">BAROKAH <span>GYM</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html" class="active">Tentang Kami</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="trainer.html">Personal Trainer</a></li>
+    <li><a href="schedule.html">Jadwal</a></li>
+    <li><a href="register.html" class="nav-cta">Daftar Sekarang</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">Tentang Kami</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="trainer.html">Personal Trainer</a></li>
+    <li><a href="schedule.html">Jadwal</a></li>
+    <li><a href="register.html">Daftar Sekarang</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-pattern"></div>
+  <div class="page-hero-content">
+    <p class="section-eyebrow" style="margin-bottom:16px;">Latar Belakang</p>
+    <h1 class="page-hero-title">TENTANG <span class="red">KAMI</span></h1>
+  </div>
+</div>
+
+<!-- STORY SECTION -->
+<div class="section">
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;">
+    <div class="fade-in">
+      <p class="section-eyebrow">Kisah Kami</p>
+      <h2 class="section-title">DARI MIMPI<br>MENUJU <span class="red">REALITA</span></h2>
+    </div>
+    <div class="fade-in" style="padding-top:40px;">
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--white-dim); line-height:2; margin-bottom:20px;">
+        Barokah GYM lahir pada tahun 2019 dari sebuah keyakinan sederhana namun kuat: bahwa setiap orang berhak mendapatkan akses ke fasilitas kebugaran premium yang tidak hanya lengkap, tetapi juga nyaman dan menginspirasi.
+      </p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--white-dim); line-height:2; margin-bottom:20px;">
+        Berlokasi strategis di Jalan Pegasaan Timur, Jakarta, kami memulai dengan tekad untuk menghadirkan pengalaman gym yang berbeda — di mana setiap anggota disambut dengan fasilitas bertaraf tinggi, bimbingan profesional, dan komunitas yang saling mendukung.
+      </p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--white-dim); line-height:2;">
+        Hari ini, lebih dari 500 member aktif mempercayakan perjalanan fitness mereka kepada kami. Bukan sekadar angka — melainkan 500 kisah perubahan nyata yang menjadi kebanggaan kami setiap harinya.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- VALUES -->
+<div class="section">
+  <div class="fade-in">
+    <p class="section-eyebrow">Nilai Kami</p>
+    <h2 class="section-title">LANDASAN <span class="red">KAMI</span></h2>
+  </div>
+  <div class="values-grid">
+    <div class="value-card fade-in">
+      <div class="value-num">01</div>
+      <div class="value-title">KOMITMEN</div>
+      <p class="value-desc">Kami berkomitmen penuh terhadap kualitas layanan, kebersihan fasilitas, dan kepuasan setiap member setiap harinya.</p>
+    </div>
+    <div class="value-card fade-in">
+      <div class="value-num">02</div>
+      <div class="value-title">PROFESIONALISME</div>
+      <p class="value-desc">Seluruh tim kami, dari personal trainer hingga staf operasional, terlatih secara profesional untuk memberikan pengalaman terbaik.</p>
+    </div>
+    <div class="value-card fade-in">
+      <div class="value-num">03</div>
+      <div class="value-title">INKLUSIVITAS</div>
+      <p class="value-desc">Barokah GYM adalah ruang bagi semua — pemula hingga atlet profesional disambut dengan program yang disesuaikan.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-number" data-target="500" data-suffix="+">0</div>
+    <div class="stat-label">Member Aktif</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" data-target="6">0</div>
+    <div class="stat-label">Personal Trainer</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" data-target="5">0</div>
+    <div class="stat-label">Tahun Berpengalaman</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number" data-target="98" data-suffix="%">0</div>
+    <div class="stat-label">Kepuasan Member</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TIMELINE / HISTORY -->
+<div class="section">
+  <div class="fade-in">
+    <p class="section-eyebrow">Perjalanan</p>
+    <h2 class="section-title">JEJAK <span class="red">SEJARAH</span></h2>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px;">
+    <div class="timeline fade-in">
+      <div class="timeline-item">
+        <div class="timeline-year">2019</div>
+        <div class="timeline-title">Barokah GYM Berdiri</div>
+        <p class="timeline-desc">Grand opening dengan 2 lantai fasilitas dan 3 personal trainer perdana. Ratusan member mendaftar di bulan pertama.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2020</div>
+        <div class="timeline-title">Renovasi & Ekspansi</div>
+        <p class="timeline-desc">Penambahan area senam dan loker pribadi. Meski pandemi, kami bertahan dan melayani virtual training.</p>
+      </div>
+    </div>
+    <div class="timeline fade-in">
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-title">500 Member Aktif</div>
+        <p class="timeline-desc">Milestone besar: 500 anggota aktif dan penambahan 3 personal trainer baru bersertifikasi internasional.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-title">Fasilitas Premium Lengkap</div>
+        <p class="timeline-desc">Upgrade total peralatan gym dan launching program membership digital untuk kemudahan akses member.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">BAROKAH <span>GYM</span></div>
+      <p class="footer-desc">Premium fitness center yang berdedikasi membantu Anda mencapai tujuan kesehatan dan kebugaran terbaik.</p>
+      <p style="font-size:0.8rem; color:var(--gray); letter-spacing:2px;">Jl. Pegasaan Timur, Jakarta</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">Tentang Kami</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="trainer.html">Personal Trainer</a></li>
+        <li><a href="schedule.html">Jadwal & Jam Buka</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Layanan</h4>
+      <ul>
+        <li><a href="membership.html">Paket Bulanan</a></li>
+        <li><a href="membership.html">Paket 3 Bulan</a></li>
+        <li><a href="membership.html">Paket Tahunan</a></li>
+        <li><a href="trainer.html">Personal Training</a></li>
+        <li><a href="register.html">Pendaftaran</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <p>Jl. Pegasaan Timur<br>Jakarta, Indonesia</p><br>
+      <p>📞 0895360433929</p><br>
+      <p>Senin – Jumat: 09.00 – 23.00<br>Weekend/Libur: 09.00 – 15.00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BAROKAH GYM. ALL RIGHTS RESERVED.</p>
+    <p>PREMIUM FITNESS CENTER · JAKARTA · <a href="../admin/" style="color:#666;text-decoration:none;font-size:0.7rem;letter-spacing:2px;">ADMIN</a></p>
+  </div>
+</footer>
+
+<a href="https://wa.me/62895360433929" class="wa-float" target="_blank">💬</a>
+<script src="../js/main.js"></script>
+</body>
+</html>

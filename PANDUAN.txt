@@ -1,0 +1,67 @@
+============================================================
+  PANDUAN WEBSITE BAROKAH GYM
+============================================================
+
+=== PERBAIKAN YANG SUDAH DILAKUKAN ===
+
+1. NOMOR WHATSAPP DIPERBAIKI
+   - Nomor lama (salah): 6289536043929
+   - Nomor baru (benar): 62895360433929
+   - Diperbaiki di semua halaman: index, about, membership,
+     register, schedule, trainer
+
+2. FITUR FOTO TRAINER DITAMBAHKAN
+   - Halaman trainer.html kini mendukung foto asli
+   - Jika foto belum ada, otomatis tampil emoji sebagai gantinya
+
+
+=== CARA MENAMBAHKAN FOTO TRAINER ===
+
+LANGKAH 1: Siapkan foto
+  - Format: JPG atau PNG
+  - Ukuran ideal: minimal 400x500 piksel (portrait/tegak)
+  - Usahakan foto fokus ke bagian wajah hingga dada ke atas
+
+LANGKAH 2: Beri nama file sesuai tabel berikut
+  ┌─────────────────────┬──────────────────────────┐
+  │ Nama Trainer        │ Nama File Foto           │
+  ├─────────────────────┼──────────────────────────┤
+  │ Rizky Pratama       │ rizky.jpg                │
+  │ Daffa Nugraha       │ daffa.jpg                │
+  │ Alif Rahman         │ alif.jpg                 │
+  │ Bagas Wicaksono     │ bagas.jpg                │
+  │ Siti Rahayu         │ siti.jpg                 │
+  │ Indah Permata       │ indah.jpg                │
+  └─────────────────────┴──────────────────────────┘
+
+LANGKAH 3: Taruh foto di folder ini:
+  GYM_BAROKAH_FIXED/
+  └── images/
+      └── trainers/   <-- simpan foto di sini
+          ├── rizky.jpg
+          ├── daffa.jpg
+          └── dst...
+
+LANGKAH 4: Buka website, foto langsung muncul otomatis!
+  (tidak perlu edit kode sama sekali)
+
+
+=== STRUKTUR FOLDER WEBSITE ===
+
+GYM_BAROKAH_FIXED/
+├── index.html              ← Halaman utama
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+├── images/
+│   └── trainers/           ← TARUH FOTO TRAINER DI SINI
+├── pages/
+│   ├── about.html
+│   ├── membership.html
+│   ├── register.html
+│   ├── schedule.html
+│   └── trainer.html
+└── database_barokah_gym.sql
+
+============================================================

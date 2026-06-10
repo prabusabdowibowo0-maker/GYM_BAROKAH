@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Membership — Barokah GYM</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="../index.html" class="nav-logo">BAROKAH <span>GYM</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">Tentang Kami</a></li>
+    <li><a href="membership.html" class="active">Membership</a></li>
+    <li><a href="trainer.html">Personal Trainer</a></li>
+    <li><a href="schedule.html">Jadwal</a></li>
+    <li><a href="register.html" class="nav-cta">Daftar Sekarang</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">Tentang Kami</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="trainer.html">Personal Trainer</a></li>
+    <li><a href="schedule.html">Jadwal</a></li>
+    <li><a href="register.html">Daftar Sekarang</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-pattern"></div>
+  <div class="page-hero-content">
+    <p class="section-eyebrow" style="margin-bottom:16px;">Pilih Paketmu</p>
+    <h1 class="page-hero-title">PAKET <span class="red">MEMBERSHIP</span></h1>
+  </div>
+</div>
+
+<!-- MEMBERSHIP CARDS -->
+<div class="section">
+  <p class="section-desc fade-in" style="margin-bottom:0;">
+    Semua paket sudah mencakup akses penuh ke seluruh fasilitas Barokah GYM. Pilih yang paling sesuai dengan kebutuhanmu.
+  </p>
+
+  <div class="membership-grid" id="membership-grid">
+
+    <!-- BULANAN -->
+    <div class="membership-card fade-in">
+      <div class="plan-name">Paket Bulanan</div>
+      <div class="plan-price">Rp 250K</div>
+      <div class="plan-period">per bulan · bayar bulanan</div>
+      <ul class="plan-features">
+        <li>Akses penuh area gym</li>
+        <li>Akses area senam</li>
+        <li>Penggunaan loker pribadi</li>
+        <li>Akses kamar mandi & shower</li>
+        <li>Konsultasi awal dengan PT (1x)</li>
+        <li>Berlaku 30 hari kalender</li>
+      </ul>
+      <a href="#" onclick="pesanWA('Paket Bulanan', 'Rp 250.000')" class="btn-primary" style="display:block; text-align:center;">Pilih Paket Ini</a>
+    </div>
+
+    <!-- 3 BULAN (FEATURED) -->
+    <div class="membership-card featured fade-in">
+      <div class="plan-name">Paket 3 Bulan</div>
+      <div class="plan-price">Rp 650K</div>
+      <div class="plan-period">per 3 bulan · hemat Rp 100.000</div>
+      <ul class="plan-features">
+        <li>Akses penuh area gym</li>
+        <li>Akses area senam</li>
+        <li>Penggunaan loker pribadi</li>
+        <li>Akses kamar mandi & shower</li>
+        <li>Konsultasi awal dengan PT (2x)</li>
+        <li>Diskon 10% sesi PT tambahan</li>
+        <li>Berlaku 90 hari kalender</li>
+      </ul>
+      <a href="#" onclick="pesanWA('Paket 3 Bulan', 'Rp 650.000')" class="btn-primary" style="display:block; text-align:center;">Pilih Paket Ini</a>
+    </div>
+
+    <!-- TAHUNAN -->
+    <div class="membership-card fade-in">
+      <div class="plan-name">Paket Tahunan</div>
+      <div class="plan-price">Rp 2JT</div>
+      <div class="plan-period">per tahun · hemat Rp 1.000.000</div>
+      <ul class="plan-features">
+        <li>Akses penuh area gym</li>
+        <li>Akses area senam</li>
+        <li>Penggunaan loker pribadi tetap</li>
+        <li>Akses kamar mandi & shower</li>
+        <li>Konsultasi PT (tidak terbatas)</li>
+        <li>Diskon 20% sesi PT tambahan</li>
+        <li>Prioritas booking kelas</li>
+        <li>Berlaku 365 hari kalender</li>
+      </ul>
+      <a href="#" onclick="pesanWA('Paket Tahunan', 'Rp 2.000.000')" class="btn-primary" style="display:block; text-align:center;">Pilih Paket Ini</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<div class="section">
+  <div class="fade-in">
+    <p class="section-eyebrow">Pertanyaan Umum</p>
+    <h2 class="section-title">FAQ <span class="red">MEMBERSHIP</span></h2>
+  </div>
+  <div style="margin-top:50px; display:grid; grid-template-columns:1fr 1fr; gap:24px;" class="fade-in">
+    <div style="background:var(--black-2); padding:32px; border:1px solid rgba(255,255,255,0.06); border-left:3px solid var(--crimson);">
+      <h3 style="font-family:'Bebas Neue',cursive; letter-spacing:2px; margin-bottom:12px;">Bagaimana cara mendaftar?</h3>
+      <p style="font-family:'Cormorant Garamond',serif; color:var(--white-dim); line-height:1.8;">Klik tombol "Pilih Paket Ini" dan kamu akan diarahkan ke WhatsApp admin kami. Admin akan memandu proses pendaftaran hingga selesai.</p>
+    </div>
+    <div style="background:var(--black-2); padding:32px; border:1px solid rgba(255,255,255,0.06); border-left:3px solid var(--crimson);">
+      <h3 style="font-family:'Bebas Neue',cursive; letter-spacing:2px; margin-bottom:12px;">Metode pembayaran apa saja?</h3>
+      <p style="font-family:'Cormorant Garamond',serif; color:var(--white-dim); line-height:1.8;">Kami menerima transfer bank, e-wallet (GoPay, OVO, Dana), serta pembayaran tunai langsung di gym.</p>
+    </div>
+    <div style="background:var(--black-2); padding:32px; border:1px solid rgba(255,255,255,0.06); border-left:3px solid var(--crimson);">
+      <h3 style="font-family:'Bebas Neue',cursive; letter-spacing:2px; margin-bottom:12px;">Apakah bisa perpanjang membership?</h3>
+      <p style="font-family:'Cormorant Garamond',serif; color:var(--white-dim); line-height:1.8;">Tentu! Perpanjangan bisa dilakukan kapan saja melalui WhatsApp admin atau langsung di loket gym kami.</p>
+    </div>
+    <div style="background:var(--black-2); padding:32px; border:1px solid rgba(255,255,255,0.06); border-left:3px solid var(--crimson);">
+      <h3 style="font-family:'Bebas Neue',cursive; letter-spacing:2px; margin-bottom:12px;">Apakah ada masa percobaan?</h3>
+      <p style="font-family:'Cormorant Garamond',serif; color:var(--white-dim); line-height:1.8;">Tersedia trial 1 hari gratis dengan konfirmasi admin terlebih dahulu. Hubungi kami via WhatsApp untuk informasi lebih lanjut.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">BAROKAH <span>GYM</span></div>
+      <p class="footer-desc">Premium fitness center yang berdedikasi membantu Anda mencapai tujuan kesehatan dan kebugaran terbaik.</p>
+      <p style="font-size:0.8rem; color:var(--gray); letter-spacing:2px;">Jl. Pegasaan Timur, Jakarta</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">Tentang Kami</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="trainer.html">Personal Trainer</a></li>
+        <li><a href="schedule.html">Jadwal & Jam Buka</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Paket</h4>
+      <ul>
+        <li><a href="#">Paket Bulanan – Rp 250K</a></li>
+        <li><a href="#">Paket 3 Bulan – Rp 650K</a></li>
+        <li><a href="#">Paket Tahunan – Rp 2JT</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <p>Jl. Pegasaan Timur<br>Jakarta, Indonesia</p><br>
+      <p>📞 0895360433929</p><br>
+      <p>Senin – Jumat: 09.00 – 23.00<br>Weekend/Libur: 09.00 – 15.00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BAROKAH GYM. ALL RIGHTS RESERVED.</p>
+    <p>PREMIUM FITNESS CENTER · JAKARTA · <a href="../admin/" style="color:#666;text-decoration:none;font-size:0.7rem;letter-spacing:2px;">ADMIN</a></p>
+  </div>
+</footer>
+
+<a href="https://wa.me/62895360433929" class="wa-float" target="_blank">💬</a>
+
+<script src="../js/main.js"></script>
+<script>
+function pesanWA(paket, harga) {
+  const msg = `Halo Admin Barokah GYM! 👋\n\nSaya tertarik untuk mendaftar:\n\n📦 *${paket}*\n💰 Harga: *${harga}*\n\nMohon info lebih lanjut mengenai proses pendaftaran dan pembayaran. Terima kasih!`;
+  const url = `https://wa.me/62895360433929?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script>
+(async () => {
+  await initSupabase();
+  const paketList = await getPaketMembership();
+  if (!paketList || !paketList.length) return;
+  const grid = document.getElementById('membership-grid');
+  grid.innerHTML = paketList.map((p, i) => {
+    const isFeatured = i === 1 ? 'featured' : '';
+    const hargaShort = p.harga >= 1000000 ? 'Rp ' + (p.harga / 1000000).toFixed(0) + 'JT' : 'Rp ' + (p.harga / 1000).toFixed(0) + 'K';
+    const fiturHTML = (p.fitur || []).map(f => '<li>' + f + '</li>').join('');
+    const period = p.durasi_hari <= 30 ? 'per bulan' : p.durasi_hari <= 90 ? 'per 3 bulan' : 'per tahun';
+    return `<div class="membership-card ${isFeatured} fade-in visible">
+      <div class="plan-name">${p.nama_paket}</div>
+      <div class="plan-price">${hargaShort}</div>
+      <div class="plan-period">${period}</div>
+      <ul class="plan-features">${fiturHTML}</ul>
+      <a href="#" onclick="pesanWA('${p.nama_paket}', '${formatRupiah(p.harga)}')" class="btn-primary" style="display:block;text-align:center;">Pilih Paket Ini</a>
+    </div>`;
+  }).join('');
+})();
+</script>
+</body>
+</html>

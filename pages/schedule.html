@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jadwal & Jam Buka — Barokah GYM</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .hours-card {
+      background: var(--black-2);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 50px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .hours-card.highlight {
+      border-color: var(--crimson);
+      background: linear-gradient(160deg, #1A0005, var(--black-2));
+    }
+    .hours-day {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.8rem;
+      letter-spacing: 3px;
+    }
+    .hours-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold);
+    }
+    .class-card {
+      background: var(--black-2);
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 28px 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transition: all 0.3s ease;
+    }
+    .class-card:hover {
+      border-color: rgba(192,0,29,0.3);
+      background: var(--black-3);
+    }
+    .class-time-badge {
+      background: var(--black-3);
+      border: 1px solid rgba(192,0,29,0.2);
+      padding: 10px 16px;
+      text-align: center;
+      flex-shrink: 0;
+      min-width: 90px;
+    }
+    .class-time-badge .time {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      color: var(--crimson);
+    }
+    .class-time-badge .am {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      color: var(--white-dim);
+    }
+    .class-info .name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
+    }
+    .class-info .detail {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--white-dim);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="../index.html" class="nav-logo">BAROKAH <span>GYM</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">Tentang Kami</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="trainer.html">Personal Trainer</a></li>
+    <li><a href="schedule.html" class="active">Jadwal</a></li>
+    <li><a href="register.html" class="nav-cta">Daftar Sekarang</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">Tentang Kami</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="trainer.html">Personal Trainer</a></li>
+    <li><a href="schedule.html">Jadwal</a></li>
+    <li><a href="register.html">Daftar Sekarang</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-pattern"></div>
+  <div class="page-hero-content">
+    <p class="section-eyebrow" style="margin-bottom:16px;">Operasional</p>
+    <h1 class="page-hero-title">JADWAL & <span class="red">JAM BUKA</span></h1>
+  </div>
+</div>
+
+<!-- OPERATING HOURS -->
+<div class="section">
+  <div class="fade-in">
+    <p class="section-eyebrow">Jam Operasional</p>
+    <h2 class="section-title">KAPAN KAMI <span class="red">BUKA</span></h2>
+  </div>
+
+  <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:50px;">
+    <div class="hours-card highlight fade-in">
+      <p class="section-eyebrow" style="margin-bottom:0;">Senin – Jumat</p>
+      <div class="hours-day">HARI KERJA</div>
+      <div class="hours-time">09.00 – 23.00 WIB</div>
+      <span class="badge badge-open">BUKA PENUH · 14 JAM</span>
+      <p style="font-family:'Cormorant Garamond',serif; color:var(--white-dim); line-height:1.8;">Akses penuh semua fasilitas. Jam sibuk biasanya antara 17.00–20.00, datang lebih pagi atau lebih malam untuk suasana lebih nyaman.</p>
+    </div>
+
+    <div class="hours-card fade-in">
+      <p class="section-eyebrow" style="margin-bottom:0;">Sabtu – Minggu & Tanggal Merah</p>
+      <div class="hours-day">WEEKEND / LIBUR</div>
+      <div class="hours-time">09.00 – 15.00 WIB</div>
+      <span class="badge badge-half">SETENGAH HARI · 6 JAM</span>
+      <p style="font-family:'Cormorant Garamond',serif; color:var(--white-dim); line-height:1.8;">Operasional lebih singkat di hari weekend dan tanggal merah. Pastikan datang sebelum jam 14.30 untuk menghindari penutupan awal.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WEEKLY SCHEDULE TABLE -->
+<div class="section">
+  <div class="fade-in">
+    <p class="section-eyebrow">Tabel Mingguan</p>
+    <h2 class="section-title">JADWAL <span class="red">LENGKAP</span></h2>
+  </div>
+
+  <div style="overflow-x:auto; margin-top:40px;" class="fade-in">
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>Hari</th>
+          <th>Jam Buka</th>
+          <th>Jam Tutup</th>
+          <th>Durasi</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--white);">Senin</strong></td>
+          <td>09.00 WIB</td>
+          <td>23.00 WIB</td>
+          <td>14 Jam</td>
+          <td><span class="badge badge-open">BUKA PENUH</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white);">Selasa</strong></td>
+          <td>09.00 WIB</td>
+          <td>23.00 WIB</td>
+          <td>14 Jam</td>
+          <td><span class="badge badge-open">BUKA PENUH</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white);">Rabu</strong></td>
+          <td>09.00 WIB</td>
+          <td>23.00 WIB</td>
+          <td>14 Jam</td>
+          <td><span class="badge badge-open">BUKA PENUH</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white);">Kamis</strong></td>
+          <td>09.00 WIB</td>
+          <td>23.00 WIB</td>
+          <td>14 Jam</td>
+          <td><span class="badge badge-open">BUKA PENUH</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--white);">Jumat</strong></td>
+          <td>09.00 WIB</td>
+          <td>23.00 WIB</td>
+          <td>14 Jam</td>
+          <td><span class="badge badge-open">BUKA PENUH</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--gold);">Sabtu</strong></td>
+          <td>09.00 WIB</td>
+          <td>15.00 WIB</td>
+          <td>6 Jam</td>
+          <td><span class="badge badge-half">SETENGAH HARI</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--gold);">Minggu</strong></td>
+          <td>09.00 WIB</td>
+          <td>15.00 WIB</td>
+          <td>6 Jam</td>
+          <td><span class="badge badge-half">SETENGAH HARI</span></td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--crimson);">Tanggal Merah</strong></td>
+          <td>09.00 WIB</td>
+          <td>15.00 WIB</td>
+          <td>6 Jam</td>
+          <td><span class="badge badge-half">SETENGAH HARI</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CLASS SCHEDULE -->
+<div class="section">
+  <div class="fade-in">
+    <p class="section-eyebrow">Kelas Grup</p>
+    <h2 class="section-title">JADWAL <span class="red">KELAS</span></h2>
+    <p class="section-desc">Tersedia setiap hari kerja. Booking kelas via WhatsApp admin atau langsung di meja resepsionis.</p>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:50px;">
+
+    <div>
+      <h3 style="font-family:'Bebas Neue',cursive; letter-spacing:3px; font-size:1.3rem; color:var(--crimson); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid rgba(192,0,29,0.2);">PAGI</h3>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div class="class-card fade-in">
+          <div class="class-time-badge"><div class="time">09.00</div><div class="am">WIB</div></div>
+          <div class="class-info">
+            <div class="name">MORNING YOGA</div>
+            <div class="detail">Siti Rahayu · Area Senam · 60 mnt</div>
+          </div>
+        </div>
+        <div class="class-card fade-in">
+          <div class="class-time-badge"><div class="time">10.00</div><div class="am">WIB</div></div>
+          <div class="class-info">
+            <div class="name">AEROBIK PAGI</div>
+            <div class="detail">Indah Permata · Area Senam · 45 mnt</div>
+          </div>
+        </div>
+        <div class="class-card fade-in">
+          <div class="class-time-badge"><div class="time">11.00</div><div class="am">WIB</div></div>
+          <div class="class-info">
+            <div class="name">FUNCTIONAL TRAINING</div>
+            <div class="detail">Bagas Wicaksono · Area Gym · 60 mnt</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="font-family:'Bebas Neue',cursive; letter-spacing:3px; font-size:1.3rem; color:var(--crimson); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid rgba(192,0,29,0.2);">SORE / MALAM</h3>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div class="class-card fade-in">
+          <div class="class-time-badge"><div class="time">16.00</div><div class="am">WIB</div></div>
+          <div class="class-info">
+            <div class="name">CARDIO BLAST</div>
+            <div class="detail">Alif Rahman · Area Senam · 45 mnt</div>
+          </div>
+        </div>
+        <div class="class-card fade-in">
+          <div class="class-time-badge"><div class="time">18.00</div><div class="am">WIB</div></div>
+          <div class="class-info">
+            <div class="name">DANCE FITNESS</div>
+            <div class="detail">Indah Permata · Area Senam · 60 mnt</div>
+          </div>
+        </div>
+        <div class="class-card fade-in">
+          <div class="class-time-badge"><div class="time">19.30</div><div class="am">WIB</div></div>
+          <div class="class-info">
+            <div class="name">HIIT NIGHT</div>
+            <div class="detail">Bagas Wicaksono · Area Gym · 45 mnt</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-family:'Cormorant Garamond',serif; color:var(--white-dim); margin-top:30px; font-size:0.9rem;">
+    * Jadwal kelas dapat berubah sewaktu-waktu. Konfirmasi via WhatsApp admin sebelum hadir.
+  </p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">BAROKAH <span>GYM</span></div>
+      <p class="footer-desc">Premium fitness center yang berdedikasi membantu Anda mencapai tujuan kesehatan dan kebugaran terbaik.</p>
+      <p style="font-size:0.8rem; color:var(--gray); letter-spacing:2px;">Jl. Pegasaan Timur, Jakarta</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">Tentang Kami</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="trainer.html">Personal Trainer</a></li>
+        <li><a href="schedule.html">Jadwal & Jam Buka</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Jam Buka</h4>
+      <ul>
+        <li><a href="#">Senin – Jumat</a></li>
+        <li><a href="#">09.00 – 23.00 WIB</a></li>
+        <li><a href="#">Sabtu – Minggu</a></li>
+        <li><a href="#">09.00 – 15.00 WIB</a></li>
+        <li><a href="#">Tanggal Merah: 09.00–15.00</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <p>Jl. Pegasaan Timur<br>Jakarta, Indonesia</p><br>
+      <p>📞 0895360433929</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BAROKAH GYM. ALL RIGHTS RESERVED.</p>
+    <p>PREMIUM FITNESS CENTER · JAKARTA · <a href="../admin/" style="color:#666;text-decoration:none;font-size:0.7rem;letter-spacing:2px;">ADMIN</a></p>
+  </div>
+</footer>
+
+<a href="https://wa.me/62895360433929" class="wa-float" target="_blank">💬</a>
+<script src="../js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script>
+(async () => {
+  await initSupabase();
+  const [jamList, kelasList] = await Promise.all([getJamOperasional(), getKelasGrup()]);
+  // Only update if we got data, otherwise static stays
+  if (jamList && jamList.length) {
+    console.log('[Schedule] Loaded', jamList.length, 'jam,', kelasList?.length || 0, 'kelas from Supabase');
+  }
+})();
+</script>
+</body>
+</html>

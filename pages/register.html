@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pendaftaran Member — Barokah GYM</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .register-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .register-info {
+      position: sticky;
+      top: 100px;
+    }
+    .form-card {
+      background: var(--black-2);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 50px 40px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .summary-box {
+      background: var(--black-3);
+      border: 1px solid rgba(192,0,29,0.2);
+      padding: 24px;
+      margin-top: 30px;
+      display: none;
+    }
+    .summary-box.show { display: block; }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--white-dim);
+      font-size: 1rem;
+    }
+    .summary-row.total {
+      border-bottom: none;
+      padding-top: 16px;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: var(--gold);
+    }
+    @media(max-width:768px){
+      .register-grid { grid-template-columns: 1fr; }
+      .register-info { position: static; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="../index.html" class="nav-logo">BAROKAH <span>GYM</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">Tentang Kami</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="trainer.html">Personal Trainer</a></li>
+    <li><a href="schedule.html">Jadwal</a></li>
+    <li><a href="register.html" class="nav-cta active">Daftar Sekarang</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <ul>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="about.html">Tentang Kami</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="trainer.html">Personal Trainer</a></li>
+    <li><a href="schedule.html">Jadwal</a></li>
+    <li><a href="register.html">Daftar Sekarang</a></li>
+  </ul>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-pattern"></div>
+  <div class="page-hero-content">
+    <p class="section-eyebrow" style="margin-bottom:16px;">Bergabung</p>
+    <h1 class="page-hero-title">DAFTAR <span class="red">MEMBER</span></h1>
+  </div>
+</div>
+
+<!-- REGISTER FORM -->
+<div class="section">
+  <div class="register-grid">
+
+    <!-- LEFT: INFO -->
+    <div class="register-info fade-in">
+      <p class="section-eyebrow">Kenapa Bergabung?</p>
+      <h2 class="section-title" style="font-size:clamp(2rem,3.5vw,3rem);">MULAI <span class="red">HARI INI</span></h2>
+      <p class="section-desc" style="margin-bottom:36px;">
+        Bergabunglah dengan 500+ member yang telah mempercayakan perjalanan fitness mereka kepada Barokah GYM.
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div style="display:flex; gap:16px; align-items:flex-start;">
+          <div style="color:var(--crimson); font-size:1.3rem; flex-shrink:0; margin-top:2px;">✦</div>
+          <div>
+            <div style="font-family:'Bebas Neue',cursive; letter-spacing:2px; margin-bottom:6px;">FASILITAS LENGKAP</div>
+            <p style="font-family:'Cormorant Garamond',serif; color:var(--white-dim); line-height:1.7;">Akses ke semua fasilitas premium termasuk gym, area senam, loker, dan kamar mandi.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:flex-start;">
+          <div style="color:var(--crimson); font-size:1.3rem; flex-shrink:0; margin-top:2px;">✦</div>
+          <div>
+            <div style="font-family:'Bebas Neue',cursive; letter-spacing:2px; margin-bottom:6px;">TRAINER PROFESIONAL</div>
+            <p style="font-family:'Cormorant Garamond',serif; color:var(--white-dim); line-height:1.7;">Bimbingan dari 6 personal trainer bersertifikat siap membantu mencapai targetmu.</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:16px; align-items:flex-start;">
+          <div style="color:var(--crimson); font-size:1.3rem; flex-shrink:0; margin-top:2px;">✦</div>
+          <div>
+            <div style="font-family:'Bebas Neue',cursive; letter-spacing:2px; margin-bottom:6px;">KOMUNITAS AKTIF</div>
+            <p style="font-family:'Cormorant Garamond',serif; color:var(--white-dim); line-height:1.7;">Bergabung dengan komunitas fitness yang saling mendukung dan menginspirasi satu sama lain.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRICE REMINDER -->
+      <div style="margin-top:40px; padding:30px; background:var(--black-2); border:1px solid rgba(192,0,29,0.2);">
+        <h4 style="font-size:0.7rem; letter-spacing:5px; text-transform:uppercase; color:var(--crimson); margin-bottom:20px;">Ringkasan Harga</h4>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div style="display:flex; justify-content:space-between; font-family:'Cormorant Garamond',serif; color:var(--white-dim);">
+            <span>Bulanan</span><strong style="color:var(--white);">Rp 250.000</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-family:'Cormorant Garamond',serif; color:var(--white-dim);">
+            <span>3 Bulan</span><strong style="color:var(--white);">Rp 650.000</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-family:'Cormorant Garamond',serif; color:var(--white-dim);">
+            <span>Tahunan</span><strong style="color:var(--gold);">Rp 2.000.000</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: FORM -->
+    <div class="fade-in">
+      <div class="form-card">
+        <h3 style="font-family:'Bebas Neue',cursive; font-size:1.8rem; letter-spacing:3px; margin-bottom:36px;">FORMULIR PENDAFTARAN</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="nama-depan">Nama Depan</label>
+            <input type="text" id="nama-depan" class="form-input" placeholder="Contoh: Budi" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="nama-belakang">Nama Belakang</label>
+            <input type="text" id="nama-belakang" class="form-input" placeholder="Contoh: Santoso" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Alamat Email</label>
+          <input type="email" id="email" class="form-input" placeholder="email@contoh.com" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="phone">Nomor WhatsApp</label>
+          <input type="tel" id="phone" class="form-input" placeholder="08xxxxxxxxxx" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="dob">Tanggal Lahir</label>
+            <input type="date" id="dob" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="gender">Jenis Kelamin</label>
+            <select id="gender" class="form-select">
+              <option value="" disabled selected>Pilih...</option>
+              <option value="L">Laki-laki</option>
+              <option value="P">Perempuan</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="paket">Paket Membership</label>
+          <select id="paket" class="form-select" onchange="updateSummary()">
+            <option value="" disabled selected>Pilih paket...</option>
+            <option value="bulanan|Rp 250.000">Paket Bulanan — Rp 250.000</option>
+            <option value="3bulan|Rp 650.000">Paket 3 Bulan — Rp 650.000</option>
+            <option value="tahunan|Rp 2.000.000">Paket Tahunan — Rp 2.000.000</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="pt">Personal Trainer (Opsional)</label>
+          <select id="pt" class="form-select" onchange="updateSummary()">
+            <option value="">Tidak perlu PT untuk saat ini</option>
+            <option value="Rizky Pratama (Strength & Powerlifting)|Rp 150.000">Rizky Pratama — Rp 150.000/sesi</option>
+            <option value="Daffa Nugraha (Bodybuilding & Hypertrophy)|Rp 150.000">Daffa Nugraha — Rp 150.000/sesi</option>
+            <option value="Alif Rahman (Cardio & Fat Loss)|Rp 130.000">Alif Rahman — Rp 130.000/sesi</option>
+            <option value="Bagas Wicaksono (Functional & HIIT)|Rp 130.000">Bagas Wicaksono — Rp 130.000/sesi</option>
+            <option value="Siti Rahayu (Yoga & Flexibility)|Rp 120.000">Siti Rahayu — Rp 120.000/sesi</option>
+            <option value="Indah Permata (Aerobik & Dance Fitness)|Rp 120.000">Indah Permata — Rp 120.000/sesi</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="catatan">Catatan / Kondisi Kesehatan (Opsional)</label>
+          <textarea id="catatan" class="form-textarea" placeholder="Ceritakan kondisi kesehatan, riwayat cedera, atau target fitness kamu..."></textarea>
+        </div>
+
+        <!-- SUMMARY BOX -->
+        <div class="summary-box" id="summary-box">
+          <h4 style="font-size:0.7rem; letter-spacing:4px; text-transform:uppercase; color:var(--crimson); margin-bottom:16px;">Ringkasan Pesanan</h4>
+          <div class="summary-row" id="sum-paket" style="display:none;">
+            <span>Membership</span>
+            <span id="sum-paket-val"></span>
+          </div>
+          <div class="summary-row" id="sum-pt" style="display:none;">
+            <span>Personal Trainer (per sesi)</span>
+            <span id="sum-pt-val"></span>
+          </div>
+          <div class="summary-row total">
+            <span>TOTAL PAKET</span>
+            <span id="sum-total"></span>
+          </div>
+        </div>
+
+        <br>
+        <button onclick="submitForm()" class="btn-primary" style="width:100%; border:none; cursor:pointer; font-size:0.9rem;">
+          KIRIM VIA WHATSAPP →
+        </button>
+        <p style="text-align:center; margin-top:16px; font-family:'Cormorant Garamond',serif; color:var(--white-dim); font-size:0.9rem;">
+          Data kamu akan dikirim ke admin via WhatsApp untuk konfirmasi lebih lanjut.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">BAROKAH <span>GYM</span></div>
+      <p class="footer-desc">Premium fitness center yang berdedikasi membantu Anda mencapai tujuan kesehatan dan kebugaran terbaik.</p>
+      <p style="font-size:0.8rem; color:var(--gray); letter-spacing:2px;">Jl. Pegasaan Timur, Jakarta</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="about.html">Tentang Kami</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="trainer.html">Personal Trainer</a></li>
+        <li><a href="schedule.html">Jadwal & Jam Buka</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Paket</h4>
+      <ul>
+        <li><a href="membership.html">Bulanan — Rp 250K</a></li>
+        <li><a href="membership.html">3 Bulan — Rp 650K</a></li>
+        <li><a href="membership.html">Tahunan — Rp 2JT</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <p>Jl. Pegasaan Timur<br>Jakarta, Indonesia</p><br>
+      <p>📞 0895360433929</p><br>
+      <p>Senin – Jumat: 09.00 – 23.00<br>Weekend/Libur: 09.00 – 15.00</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 BAROKAH GYM. ALL RIGHTS RESERVED.</p>
+    <p>PREMIUM FITNESS CENTER · JAKARTA · <a href="../admin/" style="color:#666;text-decoration:none;font-size:0.7rem;letter-spacing:2px;">ADMIN</a></p>
+  </div>
+</footer>
+
+<a href="https://wa.me/62895360433929" class="wa-float" target="_blank">💬</a>
+
+<script src="../js/main.js"></script>
+<script>
+function updateSummary() {
+  const paketEl = document.getElementById('paket');
+  const ptEl = document.getElementById('pt');
+  const box = document.getElementById('summary-box');
+  const sumPaket = document.getElementById('sum-paket');
+  const sumPaketVal = document.getElementById('sum-paket-val');
+  const sumPt = document.getElementById('sum-pt');
+  const sumPtVal = document.getElementById('sum-pt-val');
+  const sumTotal = document.getElementById('sum-total');
+
+  if (!paketEl.value) { box.classList.remove('show'); return; }
+
+  box.classList.add('show');
+
+  const [namaPaket, hargaPaket] = paketEl.value.split('|');
+  sumPaket.style.display = 'flex';
+  sumPaketVal.textContent = hargaPaket;
+
+  let totalLabel = hargaPaket;
+
+  if (ptEl.value) {
+    const [namapt, hargaPt] = ptEl.value.split('|');
+    sumPt.style.display = 'flex';
+    sumPtVal.textContent = hargaPt + '/sesi';
+    totalLabel = hargaPaket + ' + PT';
+  } else {
+    sumPt.style.display = 'none';
+  }
+
+  sumTotal.textContent = totalLabel;
+}
+
+function submitForm() {
+  const nama = (document.getElementById('nama-depan').value + ' ' + document.getElementById('nama-belakang').value).trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const dob = document.getElementById('dob').value;
+  const gender = document.getElementById('gender').value;
+  const paket = document.getElementById('paket').value;
+  const pt = document.getElementById('pt').value;
+  const catatan = document.getElementById('catatan').value.trim();
+
+  if (!nama || !phone || !paket) {
+    alert('Mohon isi nama, nomor WhatsApp, dan pilih paket membership terlebih dahulu.');
+    return;
+  }
+
+  const [namaPaket, hargaPaket] = paket.split('|');
+  const genderLabel = gender === 'L' ? 'Laki-laki' : gender === 'P' ? 'Perempuan' : '-';
+
+  let msg = `Halo Admin Barokah GYM! 👋\n\nSaya ingin mendaftar sebagai member baru:\n\n`;
+  msg += `👤 *Nama:* ${nama}\n`;
+  msg += `📧 *Email:* ${email || '-'}\n`;
+  msg += `📱 *No. WA:* ${phone}\n`;
+  msg += `🎂 *Tgl Lahir:* ${dob || '-'}\n`;
+  msg += `🚻 *Jenis Kelamin:* ${genderLabel}\n\n`;
+  msg += `📦 *Paket Dipilih:* ${namaPaket.charAt(0).toUpperCase() + namaPaket.slice(1)}\n`;
+  msg += `💰 *Harga Paket:* ${hargaPaket}\n`;
+
+  if (pt) {
+    const [namaPT, hargaPT] = pt.split('|');
+    msg += `🏋️ *Personal Trainer:* ${namaPT}\n`;
+    msg += `💳 *Harga Sesi PT:* ${hargaPT}/sesi\n`;
+  }
+
+  if (catatan) {
+    msg += `\n📝 *Catatan:* ${catatan}\n`;
+  }
+
+  msg += `\nMohon konfirmasi proses pendaftaran dan metode pembayaran. Terima kasih!`;
+
+  const url = `https://wa.me/62895360433929?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script>
+let paketData = [];
+let trainerData = [];
+
+(async () => {
+  await initSupabase();
+  [paketData, trainerData] = await Promise.all([
+    getPaketMembership().then(d => d || []),
+    getTrainers().then(d => d || [])
+  ]);
+
+  // Enhance paket dropdown if Supabase loaded
+  const paketEl = document.getElementById('paket');
+  if (paketData.length && paketEl) {
+    paketEl.innerHTML = '<option value="" disabled selected>Pilih paket...</option>' +
+      paketData.map(p => `<option value="${p.id_paket}" data-nama="${p.nama_paket}" data-harga="${p.harga}" data-durasi="${p.durasi_hari}">${p.nama_paket} — ${formatRupiah(p.harga)}</option>`).join('');
+  }
+
+  // Enhance trainer dropdown
+  const ptEl = document.getElementById('pt');
+  if (trainerData.length && ptEl) {
+    ptEl.innerHTML = '<option value="">Tidak perlu PT untuk saat ini</option>' +
+      trainerData.map(t => `<option value="${t.id_trainer}" data-nama="${t.nama}" data-harga="${t.harga_per_sesi}">${t.nama} — ${formatRupiah(t.harga_per_sesi)}/sesi</option>`).join('');
+  }
+})();
+
+// Override submit to save to Supabase + WA
+const origSubmit = typeof submitForm === 'function' ? submitForm : null;
+async function submitFormEnhanced() {
+  const namaDepan = document.getElementById('nama-depan')?.value?.trim();
+  const namaBelakang = document.getElementById('nama-belakang')?.value?.trim();
+  const email = document.getElementById('email')?.value?.trim();
+  const phone = document.getElementById('phone')?.value?.trim();
+  const dob = document.getElementById('dob')?.value;
+  const gender = document.getElementById('gender')?.value;
+  const paketEl = document.getElementById('paket');
+  const catatan = document.getElementById('catatan')?.value?.trim();
+
+  if (!namaDepan || !phone) {
+    alert('Mohon isi nama dan nomor WhatsApp.');
+    return;
+  }
+
+  // Try save to Supabase
+  if (sb) {
+    const member = await simpanMemberBaru({
+      nama_depan: namaDepan,
+      nama_belakang: namaBelakang || null,
+      email: email || null,
+      no_whatsapp: phone,
+      tanggal_lahir: dob || null,
+      jenis_kelamin: gender || null,
+      catatan: catatan || null,
+      status: 'pending'
+    });
+
+    if (member && paketEl?.value) {
+      const opt = paketEl.selectedOptions[0];
+      const durasi = parseInt(opt?.dataset?.durasi || 30);
+      const today = new Date();
+      const selesai = new Date(today);
+      selesai.setDate(selesai.getDate() + durasi);
+      await simpanPendaftaran({
+        id_member: member.id_member,
+        id_paket: parseInt(paketEl.value),
+        tanggal_mulai: today.toISOString().split('T')[0],
+        tanggal_selesai: selesai.toISOString().split('T')[0],
+        total_bayar: parseFloat(opt?.dataset?.harga || 0),
+        status_bayar: 'pending'
+      });
+    }
+  }
+
+  // Always send WA regardless
+  if (typeof sendToWA === 'function') sendToWA();
+  else if (origSubmit) origSubmit();
+}
+</script>
+</body>
+</html>
